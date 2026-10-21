@@ -2248,3 +2248,55 @@ body.text-small h3 { font-size: 1.25rem; }
   --card-accent: #e11d48;
   --card-accent-soft: #fff1f2;
 }
+
+/* ==========================================================================
+   Google Translate Seamless Engine & Brand Protection
+   ========================================================================== */
+#google_translate_element,
+.google-translate-hidden {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide default Google Translate top banner, tooltips, and frame */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Prevent Google Translate from pushing body down by 40px */
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+/* Prevent Google font wrapper styling glitches */
+font[style], font {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+/* Keep brand name intact and styled consistently */
+.notranslate,
+[translate="no"] {
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  display: inline;
+}
+
