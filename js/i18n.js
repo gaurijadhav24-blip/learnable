@@ -166,9 +166,9 @@ function ensureDevanagariFont() {
  * Marks both container elements and any raw occurrences of "LearnAble" with class="notranslate" and translate="no".
  */
 function protectBrandNames() {
-  // 1. Mark existing brand containers
+  // 1. Mark existing brand title and heading elements (never layout wrappers)
   const brandEls = document.querySelectorAll(
-    '.brand, .brand strong, .brand-mark, .brand-mark-sm, .footer-brand, .footer-brand-text h3, .drawer-brand, [data-brand]'
+    '.brand strong, .footer-brand-text h3, .drawer-brand strong, [data-brand]'
   );
   brandEls.forEach((el) => {
     el.classList.add('notranslate');

@@ -30,7 +30,9 @@ function setupNavigation() {
     drawerHeader.className = 'mobile-drawer-header';
     drawerHeader.innerHTML = `
       <div class="drawer-brand">
-        <span class="brand-mark-sm">L</span>
+        <span class="brand-mark-sm">
+          <img src="images/logo-icon.svg" alt="LearnAble Logo" width="36" height="36" />
+        </span>
         <div>
           <strong>LearnAble</strong>
           <small style="display:block; font-size: 0.72rem; color: var(--text-secondary); font-weight: 500;">Navigation</small>

@@ -209,53 +209,63 @@ textarea:focus-visible {
   min-height: 60px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+/* Brand Identification */
+.brand,
+a.brand {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
   color: var(--text-primary);
   font-weight: 700;
   text-decoration: none;
-  font-size: 1.2rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .brand:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .brand-mark {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
-  color: #ffffff !important;
-  border-radius: 10px;
-  display: flex !important;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  font-weight: 800 !important;
-  font-size: 1.35rem !important;
-  line-height: 1 !important;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.28);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.28);
   transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.brand-mark img,
+.brand-logo-img {
+  width: 42px;
+  height: 42px;
+  display: block;
+  object-fit: contain;
 }
 
 .brand:hover .brand-mark {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-.brand span {
-  line-height: 1.2;
+.brand span.brand-text,
+.brand span:not(.brand-mark) {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.15;
 }
 
 .brand strong {
   display: block;
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .brand small {
@@ -1457,31 +1467,40 @@ body.high-contrast .a11y-status-indicator {
 }
 
 .footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.95rem !important;
   margin-bottom: 1.15rem;
 }
 
+.footer-logo-img,
+.footer-logo-mark img {
+  width: 46px;
+  height: 46px;
+  display: block;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
 .footer-logo-mark {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
-  color: #ffffff !important;
-  border-radius: 11px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   flex-shrink: 0;
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  font-weight: 800 !important;
-  font-size: 1.45rem !important;
-  line-height: 1 !important;
+  overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
-.footer-logo-mark::before {
-  content: 'L';
-  color: #ffffff;
+.footer-brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .footer-brand-text h3 {
@@ -1701,30 +1720,30 @@ body.high-contrast .a11y-status-indicator {
   }
 
   .drawer-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
   }
 
   .brand-mark-sm {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
-    color: #ffffff !important;
-    border-radius: 9px;
+    border-radius: 10px;
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    font-weight: 800 !important;
-    font-size: 1.25rem !important;
-    line-height: 1 !important;
     flex-shrink: 0;
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    overflow: hidden;
   }
 
-  .brand-mark-sm::before {
-    content: 'L';
-    color: #ffffff;
+  .brand-mark-sm img,
+  .drawer-logo-img {
+    width: 36px;
+    height: 36px;
+    display: block;
+    object-fit: contain;
   }
 
   .mobile-drawer-close {
@@ -2320,6 +2339,5 @@ font[style], font {
   font-family: inherit;
   font-weight: inherit;
   font-style: normal;
-  display: inline;
 }
 
