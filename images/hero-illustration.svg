@@ -1,92 +1,231 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
-  <!-- Background -->
-  <rect width="800" height="600" fill="#f9fafb"/>
-  
-  <!-- Decorative circles -->
-  <circle cx="100" cy="100" r="80" fill="#e0e7ff" opacity="0.5"/>
-  <circle cx="700" cy="500" r="120" fill="#fce7f3" opacity="0.5"/>
-  <circle cx="600" cy="150" r="60" fill="#fef3c7" opacity="0.3"/>
-  
-  <!-- Learner figure -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 800 565" width="800" height="565" role="img" aria-label="LearnAble Inclusive Education and Learning Disability Support Illustration">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8faff" />
+      <stop offset="50%" stop-color="#f0f4ff" />
+      <stop offset="100%" stop-color="#faf5ff" />
+    </linearGradient>
+
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6" />
+      <stop offset="100%" stop-color="#0d9488" />
+    </linearGradient>
+
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#e11d48" />
+    </linearGradient>
+
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+
+    <linearGradient id="bookGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e0e7ff" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="softShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#4338ca" flood-opacity="0.12" />
+    </filter>
+
+    <filter id="badgeShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect y="35" width="800" height="565" rx="24" fill="url(#bgGrad)" />
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="160" cy="120" r="110" fill="#e0e7ff" opacity="0.6" />
+  <circle cx="680" cy="160" r="130" fill="#fce7f3" opacity="0.5" />
+  <circle cx="400" cy="300" r="190" fill="#fef3c7" opacity="0.35" />
+
+  <!-- Subtle Geometric Grid Dots -->
+  <g fill="#94a3b8" opacity="0.25">
+    <circle cx="80" cy="60" r="2.5"/><circle cx="110" cy="60" r="2.5"/><circle cx="140" cy="60" r="2.5"/>
+    <circle cx="80" cy="90" r="2.5"/><circle cx="110" cy="90" r="2.5"/><circle cx="140" cy="90" r="2.5"/>
+    <circle cx="80" cy="120" r="2.5"/><circle cx="110" cy="120" r="2.5"/><circle cx="140" cy="120" r="2.5"/>
+    <circle cx="660" cy="480" r="2.5"/><circle cx="690" cy="480" r="2.5"/><circle cx="720" cy="480" r="2.5"/>
+    <circle cx="660" cy="510" r="2.5"/><circle cx="690" cy="510" r="2.5"/><circle cx="720" cy="510" r="2.5"/>
+  </g>
+
+  <!-- Central Illustrated Scene -->
+  <!-- Glowing Base Podium / Desk -->
+  <ellipse cx="400" cy="430" rx="310" ry="46" fill="#e2e8f0" opacity="0.65" />
+  <ellipse cx="400" cy="425" rx="285" ry="38" fill="#ffffff" filter="url(#badgeShadow)" />
+
+  <!-- Large Open Book of Knowledge -->
+  <g filter="url(#softShadow)">
+    <!-- Book Spine &amp; Pages -->
+    <path d="M 400 375 L 400 420 Q 300 435 230 405 L 230 355 Q 310 385 400 375 Z" fill="#e0e7ff" />
+    <path d="M 400 375 L 400 420 Q 500 435 570 405 L 570 355 Q 490 385 400 375 Z" fill="#c7d2fe" />
+    <!-- Top Pages Layer -->
+    <path d="M 400 368 L 400 412 Q 300 426 235 398 L 235 350 Q 312 378 400 368 Z" fill="url(#bookGlow)" />
+    <path d="M 400 368 L 400 412 Q 500 426 565 398 L 565 350 Q 488 378 400 368 Z" fill="#ffffff" />
+    <!-- Book Lines / Text Rows -->
+    <path d="M 260 370 Q 320 388 380 380 M 260 382 Q 320 400 380 392 M 260 394 Q 320 412 380 404" stroke="#a5b4fc" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <path d="M 420 380 Q 480 388 540 370 M 420 392 Q 480 400 540 382 M 420 404 Q 480 412 540 394" stroke="#a5b4fc" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- Glowing Ideas Emanating from Book -->
   <g>
+    <!-- Central Light Bulb of Insight -->
+    <circle cx="400" cy="270" r="32" fill="url(#amberGrad)" filter="url(#softShadow)" />
+    <path d="M 390 286 L 410 286 L 406 295 L 394 295 Z" fill="#d97706" />
+    <!-- Filament icon -->
+    <path d="M 392 265 Q 400 252 408 265 Q 400 274 400 282" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" />
+    <!-- Beams of light -->
+    <line x1="400" y1="225" x2="400" y2="212" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="435" y1="240" x2="445" y2="230" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="365" y1="240" x2="355" y2="230" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="445" y1="272" x2="458" y2="272" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" />
+    <line x1="355" y1="272" x2="342" y2="272" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- Character 1 (Left): Learner with Headphones &amp; Audio Book (Dyslexia Accommodation) -->
+  <g transform="translate(140, 210)" filter="url(#softShadow)">
+    <!-- Shadow -->
+    <ellipse cx="60" cy="195" rx="42" ry="10" fill="#cbd5e1" opacity="0.6" />
+    <!-- Body / Jacket -->
+    <path d="M 35 125 C 35 95, 85 95, 85 125 L 92 185 L 28 185 Z" fill="url(#primaryGrad)" />
+    <!-- Inner shirt -->
+    <path d="M 50 102 L 70 102 L 65 140 L 55 140 Z" fill="#ffffff" />
     <!-- Head -->
-    <circle cx="150" cy="180" r="30" fill="#6366f1"/>
-    <!-- Body -->
-    <rect x="130" y="220" width="40" height="60" fill="#818cf8" rx="5"/>
-    <!-- Arms -->
-    <rect x="100" y="240" width="30" height="15" fill="#818cf8" rx="7"/>
-    <rect x="170" y="240" width="30" height="15" fill="#818cf8" rx="7"/>
-    <!-- Legs -->
-    <rect x="135" y="285" width="10" height="40" fill="#6366f1" rx="5"/>
-    <rect x="155" y="285" width="10" height="40" fill="#6366f1" rx="5"/>
-    <!-- Book in hand -->
-    <rect x="180" y="245" width="25" height="35" fill="#ec4899" rx="3"/>
+    <circle cx="60" cy="65" r="28" fill="#fed7aa" />
+    <!-- Hair -->
+    <path d="M 35 60 C 35 35, 85 32, 85 58 C 75 48, 48 50, 35 60 Z" fill="#475569" />
+    <!-- Friendly Face -->
+    <circle cx="53" cy="68" r="3" fill="#334155" />
+    <circle cx="69" cy="68" r="3" fill="#334155" />
+    <path d="M 56 78 Q 61 84 66 78" stroke="#ea580c" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <!-- Glasses (Sharp focus) -->
+    <circle cx="52" cy="68" r="9" stroke="#6366f1" stroke-width="2" fill="none" />
+    <circle cx="70" cy="68" r="9" stroke="#6366f1" stroke-width="2" fill="none" />
+    <line x1="61" y1="68" x2="61" y2="68" stroke="#6366f1" stroke-width="2" />
+    <!-- Over-Ear Headphones (Audiobook Assistive Tech) -->
+    <path d="M 32 68 C 30 30, 90 30, 88 68" stroke="#312e81" stroke-width="5" fill="none" stroke-linecap="round" />
+    <rect x="27" y="58" width="10" height="20" rx="5" fill="#4338ca" />
+    <rect x="83" y="58" width="10" height="20" rx="5" fill="#4338ca" />
+    <!-- Arms holding physical book + audio device -->
+    <rect x="25" y="130" width="22" height="12" rx="6" fill="#fed7aa" transform="rotate(20, 25, 130)" />
+    <rect x="75" y="135" width="22" height="12" rx="6" fill="#fed7aa" transform="rotate(-20, 75, 135)" />
+    <!-- Compact Smart Audio Player -->
+    <rect x="44" y="140" width="32" height="42" rx="6" fill="#1e1b4b" />
+    <rect x="48" y="145" width="24" height="20" rx="3" fill="#38bdf8" />
+    <!-- Sound Waves Icon on Screen -->
+    <path d="M 54 155 L 54 155 M 57 152 L 57 158 M 60 149 L 60 161 M 63 152 L 63 158 M 66 155 L 66 155" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+    <circle cx="60" cy="173" r="3.5" fill="#ffffff" />
   </g>
-  
-  <!-- Teacher figure -->
-  <g>
+
+  <!-- Character 2 (Right): Creative Learner with Digital Tablet (Dysgraphia / Dyscalculia Success) -->
+  <g transform="translate(540, 210)" filter="url(#softShadow)">
+    <!-- Shadow -->
+    <ellipse cx="60" cy="195" rx="42" ry="10" fill="#cbd5e1" opacity="0.6" />
+    <!-- Body / Sweater -->
+    <path d="M 35 125 C 35 95, 85 95, 85 125 L 92 185 L 28 185 Z" fill="url(#tealGrad)" />
+    <!-- Collar -->
+    <path d="M 48 102 Q 60 115 72 102 Z" fill="#ccfbf1" />
     <!-- Head -->
-    <circle cx="400" cy="150" r="30" fill="#10b981"/>
-    <!-- Body -->
-    <rect x="380" y="190" width="40" height="70" fill="#34d399" rx="5"/>
-    <!-- Arms -->
-    <rect x="350" y="210" width="30" height="15" fill="#34d399" rx="7"/>
-    <rect x="420" y="210" width="30" height="15" fill="#34d399" rx="7"/>
-    <!-- Legs -->
-    <rect x="385" y="265" width="10" height="50" fill="#10b981" rx="5"/>
-    <rect x="405" y="265" width="10" height="50" fill="#10b981" rx="5"/>
-    <!-- Pointer -->
-    <line x1="440" y1="220" x2="500" y2="280" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="60" cy="65" r="28" fill="#fcd34d" />
+    <!-- Hair with Cute Bun -->
+    <path d="M 34 60 C 34 32, 86 32, 86 60 C 76 46, 46 48, 34 60 Z" fill="#92400e" />
+    <circle cx="60" cy="30" r="14" fill="#92400e" />
+    <!-- Friendly Face -->
+    <circle cx="53" cy="68" r="3" fill="#78350f" />
+    <circle cx="69" cy="68" r="3" fill="#78350f" />
+    <path d="M 55 77 Q 61 84 67 77" stroke="#b45309" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <!-- Arms holding Digital Tablet &amp; Stylus -->
+    <rect x="22" y="132" width="22" height="12" rx="6" fill="#fcd34d" transform="rotate(15, 22, 132)" />
+    <!-- Digital Tablet for typing / drawing -->
+    <rect x="42" y="135" width="46" height="42" rx="6" fill="#0f172a" />
+    <rect x="46" y="139" width="38" height="34" rx="4" fill="#f0fdfa" />
+    <!-- Bar Chart &amp; Math Formula on Tablet -->
+    <rect x="50" y="157" width="5" height="12" fill="#0d9488" rx="1.5" />
+    <rect x="58" y="150" width="5" height="19" fill="#0d9488" rx="1.5" />
+    <rect x="66" y="145" width="5" height="24" fill="#14b8a6" rx="1.5" />
+    <circle cx="74" cy="148" r="2.5" fill="#f59e0b" />
+    <!-- Stylus in Hand -->
+    <line x1="82" y1="130" x2="72" y2="148" stroke="#0284c7" stroke-width="3" stroke-linecap="round" />
   </g>
-  
-  <!-- Parent/Caregiver figure -->
-  <g>
-    <!-- Head -->
-    <circle cx="650" cy="180" r="30" fill="#f59e0b"/>
-    <!-- Body -->
-    <rect x="630" y="220" width="40" height="65" fill="#fbbf24" rx="5"/>
-    <!-- Arms -->
-    <rect x="600" y="240" width="30" height="15" fill="#fbbf24" rx="7"/>
-    <rect x="670" y="240" width="30" height="15" fill="#fbbf24" rx="7"/>
-    <!-- Legs -->
-    <rect x="635" y="290" width="10" height="45" fill="#f59e0b" rx="5"/>
-    <rect x="655" y="290" width="10" height="45" fill="#f59e0b" rx="5"/>
-    <!-- Heart symbol -->
-    <text x="650" y="250" font-size="30" text-anchor="middle" fill="#ef4444">♥</text>
+
+  <!-- Neurodiversity Infinity Symbol in Sky (Celebrating Diverse Minds) -->
+  <g transform="translate(400, 155)" filter="url(#softShadow)">
+    <path d="M -55 0 C -55 -28, -15 -28, 0 0 C 15 28, 55 28, 55 0 C 55 -28, 15 -28, 0 0 C -15 28, -55 28, -55 0 Z"
+          fill="none" stroke="url(#roseGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" />
+    <!-- Sparkles of brilliance -->
+    <path d="M -60 -18 L -56 -18 M -58 -20 L -58 -16" stroke="#f43f5e" stroke-width="2" stroke-linecap="round" />
+    <path d="M 60 18 L 64 18 M 62 16 L 62 20" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" />
   </g>
-  
-  <!-- Support pathway boxes -->
-  <g>
-    <!-- Box 1 -->
-    <rect x="50" y="420" width="120" height="100" fill="#e0e7ff" rx="8" stroke="#6366f1" stroke-width="2"/>
-    <text x="110" y="455" font-size="14" font-weight="bold" text-anchor="middle" fill="#6366f1">Assessment</text>
-    <text x="110" y="475" font-size="12" text-anchor="middle" fill="#4f46e5">Professional</text>
-    <text x="110" y="490" font-size="12" text-anchor="middle" fill="#4f46e5">guidance</text>
-    
-    <!-- Box 2 -->
-    <rect x="210" y="420" width="120" height="100" fill="#dbeafe" rx="8" stroke="#3b82f6" stroke-width="2"/>
-    <text x="270" y="455" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">Learning</text>
-    <text x="270" y="475" font-size="12" text-anchor="middle" fill="#1e3a8a">Support</text>
-    <text x="270" y="490" font-size="12" text-anchor="middle" fill="#1e3a8a">Strategies</text>
-    
-    <!-- Box 3 -->
-    <rect x="370" y="420" width="120" height="100" fill="#fef3c7" rx="8" stroke="#f59e0b" stroke-width="2"/>
-    <text x="430" y="455" font-size="14" font-weight="bold" text-anchor="middle" fill="#d97706">Resources</text>
-    <text x="430" y="475" font-size="12" text-anchor="middle" fill="#b45309">Verified</text>
-    <text x="430" y="490" font-size="12" text-anchor="middle" fill="#b45309">information</text>
-    
-    <!-- Box 4 -->
-    <rect x="530" y="420" width="120" height="100" fill="#dcfce7" rx="8" stroke="#10b981" stroke-width="2"/>
-    <text x="590" y="455" font-size="14" font-weight="bold" text-anchor="middle" fill="#065f46">Community</text>
-    <text x="590" y="475" font-size="12" text-anchor="middle" fill="#047857">Support</text>
-    <text x="590" y="490" font-size="12" text-anchor="middle" fill="#047857">Network</text>
+
+  <!-- 4 Interactive Floating Support Pathway Cards -->
+  <!-- 1. Assessment (Bottom Left) -->
+  <g transform="translate(60, 470)" filter="url(#badgeShadow)">
+    <rect width="155" height="78" rx="14" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.8" />
+    <rect x="12" y="14" width="30" height="30" rx="8" fill="#eef2ff" />
+    <text x="27" y="34" font-size="16" text-anchor="middle">🔍</text>
+    <text x="50" y="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="700" fill="#4338ca">Assessment</text>
+    <text x="50" y="41" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" fill="#64748b">Early Identification</text>
+    <text x="14" y="62" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" font-weight="600" fill="#4f46e5">Clinical Guidance &#8594;</text>
   </g>
-  
-  <!-- Connection lines -->
-  <line x1="150" y1="330" x2="110" y2="420" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5"/>
-  <line x1="400" y1="320" x2="270" y2="420" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5"/>
-  <line x1="650" y1="335" x2="430" y2="420" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5,5"/>
-  
-  <!-- Title text -->
-  <text x="400" y="560" font-size="18" font-weight="bold" text-anchor="middle" fill="#1f2937">LearnAble: Educational Support for All</text>
+
+  <!-- 2. Learning Strategies (Center-Left) -->
+  <g transform="translate(235, 470)" filter="url(#badgeShadow)">
+    <rect width="155" height="78" rx="14" fill="#ffffff" stroke="#99f6e4" stroke-width="1.8" />
+    <rect x="12" y="14" width="30" height="30" rx="8" fill="#f0fdfa" />
+    <text x="27" y="34" font-size="16" text-anchor="middle">💡</text>
+    <text x="50" y="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="700" fill="#0f766e">Strategies</text>
+    <text x="50" y="41" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" fill="#64748b">Multisensory Aids</text>
+    <text x="14" y="62" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" font-weight="600" fill="#0d9488">Explore Tools &#8594;</text>
+  </g>
+
+  <!-- 3. Resources (Center-Right) -->
+  <g transform="translate(410, 470)" filter="url(#badgeShadow)">
+    <rect width="155" height="78" rx="14" fill="#ffffff" stroke="#fde68a" stroke-width="1.8" />
+    <rect x="12" y="14" width="30" height="30" rx="8" fill="#fffbeb" />
+    <text x="27" y="34" font-size="16" text-anchor="middle">📚</text>
+    <text x="50" y="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="700" fill="#b45309">Resources</text>
+    <text x="50" y="41" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" fill="#64748b">Verified &amp; Indian Acts</text>
+    <text x="14" y="62" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" font-weight="600" fill="#d97706">RPwD &amp; NCERT &#8594;</text>
+  </g>
+
+  <!-- 4. Community (Bottom Right) -->
+  <g transform="translate(585, 470)" filter="url(#badgeShadow)">
+    <rect width="155" height="78" rx="14" fill="#ffffff" stroke="#fbcfe8" stroke-width="1.8" />
+    <rect x="12" y="14" width="30" height="30" rx="8" fill="#fdf2f8" />
+    <text x="27" y="34" font-size="16" text-anchor="middle">🤝</text>
+    <text x="50" y="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="700" fill="#be185d">Community</text>
+    <text x="50" y="41" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" fill="#64748b">Learners &amp; Parents</text>
+    <text x="14" y="62" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="9.5" font-weight="600" fill="#e11d48">Together for All &#8594;</text>
+  </g>
+
+  <!-- Connecting dashed lines to the book -->
+  <path d="M 140 470 Q 230 435 300 410" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+  <path d="M 310 470 Q 350 435 375 410" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+  <path d="M 490 470 Q 450 435 425 410" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+  <path d="M 660 470 Q 570 435 500 410" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+
+  <!-- Bottom Brand Ribbon Badge -->
+  <g transform="translate(250, 565)">
+    <rect width="300" height="26" rx="13" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2" filter="url(#badgeShadow)" />
+    <circle cx="14" cy="13" r="5" fill="#6366f1" />
+    <circle cx="286" cy="13" r="5" fill="#ec4899" />
+    <text x="150" y="17" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle" letter-spacing="0.3px">
+      LearnAble • Educational Support &amp; Awareness For All
+    </text>
+  </g>
 </svg>

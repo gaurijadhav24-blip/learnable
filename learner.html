@@ -3,39 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Learner Support | LearnAble</title>
+    <meta name="description" content="Practical study strategies, memory techniques, and confidence-building methods for learners and students." />
+    <title>Learner Support Strategies | LearnAble</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+
     <header class="site-header">
       <div class="container nav-wrapper">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="LearnAble home">
           <span class="brand-mark">L</span>
-          <span><strong>LearnAble</strong><small>Learning Disability Awareness & Support</small></span>
+          <span>
+            <strong data-i18n="brand.title">LearnAble</strong>
+            <small data-i18n="brand.subtitle">Learning Disability Awareness & Support</small>
+          </span>
         </a>
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="learning-areas.html">Learning Areas</a>
-          <a href="assessment.html">Assessment Guide</a>
-          <a href="learner.html" class="active">Learner Support</a>
-          <a href="parent.html">Parent Support</a>
-          <a href="educator.html">Educator Support</a>
-          <a href="activities.html">Activities</a>
-          <a href="resources.html">Resources</a>
-          <a href="faq.html">FAQ</a>
-          <a href="feedback.html">Feedback</a>
+          <a href="index.html" data-i18n="nav.home">Home</a>
+          <a href="about.html" data-i18n="nav.about">About</a>
+          <a href="learning-areas.html" data-i18n="nav.learningAreas">Learning Areas</a>
+          <a href="assessment.html" data-i18n="nav.assessment">Assessment Guide</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-btn active" aria-haspopup="true" aria-expanded="false">
+              <span data-i18n="nav.support">Support Pathways</span> ▾
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="learner.html" class="active" data-i18n="nav.learner">Learner Support</a>
+              <a href="parent.html" data-i18n="nav.parent">Parent Support</a>
+              <a href="educator.html" data-i18n="nav.educator">Educator Support</a>
+            </div>
+          </div>
+          <a href="activities.html" data-i18n="nav.activities">Activities</a>
+          <a href="resources.html" data-i18n="nav.resources">Resources</a>
+          <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+          <a href="feedback.html" data-i18n="nav.feedback">Feedback</a>
         </nav>
+
         <div class="toolbar-group">
-          <label class="language-selector">
-            <span>Language</span>
+          <label class="language-selector" aria-label="Language selector">
+            <span>🌐</span>
             <select id="languageSelector">
               <option value="en">English</option>
-              <option value="mr">Marathi</option>
-              <option value="hi">Hindi</option>
+              <option value="hi">हिंदी</option>
+              <option value="mr">मराठी</option>
             </select>
           </label>
         </div>
@@ -46,23 +66,25 @@
       <section class="page-hero">
         <div class="container narrow">
           <p class="eyebrow">Module 4</p>
-          <h1>Learner Support</h1>
+          <h1 data-i18n="nav.learner">Learner Support & Study Strategies</h1>
+          <p>Practical, empowering techniques to master your study sessions, organize thoughts, and build lasting confidence.</p>
         </div>
       </section>
 
       <section class="section">
         <div class="container card-grid three-up">
-          <div class="info-card small-card"><h3>Study Planning</h3><p>Break the week into manageable tasks and review goals regularly.</p></div>
-          <div class="info-card small-card"><h3>Chunking Tasks</h3><p>Divide large tasks into smaller steps to reduce overwhelm.</p></div>
-          <div class="info-card small-card"><h3>Reading Strategies</h3><p>Use highlighting, previewing headings, and repeated reading when needed.</p></div>
-          <div class="info-card small-card"><h3>Writing Strategies</h3><p>Plan with bullet points, sentence frames, and checking for clarity.</p></div>
-          <div class="info-card small-card"><h3>Spelling Practice</h3><p>Practice word families, write in context, and build confidence gradually.</p></div>
-          <div class="info-card small-card"><h3>Mathematics Strategies</h3><p>Use visual examples, formulas, and step-by-step problem solving.</p></div>
-          <div class="info-card small-card"><h3>Memory Techniques</h3><p>Use mnemonics, revision cards, and repeated recall practice.</p></div>
-          <div class="info-card small-card"><h3>Time Management</h3><p>Create routines for homework, revision, and rest.</p></div>
-          <div class="info-card small-card"><h3>Exam Preparation</h3><p>Practice with sample questions, review key concepts, and take short breaks.</p></div>
-          <div class="info-card small-card"><h3>Taking Breaks</h3><p>Short breaks help focus and reduce fatigue during difficult tasks.</p></div>
-          <div class="info-card small-card"><h3>Ask for Help</h3><p>It is okay to ask a teacher or caregiver for support and clarification.</p></div>
+          <div class="info-card"><h3>1. Study Planning</h3><p>Break your week into realistic, 30-minute study blocks. Color-code subjects and maintain a simple visual checklist on your desk.</p></div>
+          <div class="info-card"><h3>2. Chunking Heavy Tasks</h3><p>Never tackle a whole chapter at once. Read one heading, write two key takeaway bullets, then pause. Small victories prevent cognitive overload.</p></div>
+          <div class="info-card"><h3>3. Active Reading Tools</h3><p>Use colored highlighter overlays, ruler line-trackers, or free screen-readers (text-to-speech) to absorb textbooks effortlessly.</p></div>
+          <div class="info-card"><h3>4. Structured Writing</h3><p>Brainstorm with mind maps or voice notes first. Convert your spoken ideas into bullet points before writing full paragraphs.</p></div>
+          <div class="info-card"><h3>5. Multi-Sensory Spelling</h3><p>Trace challenging words on textured surfaces or air-write them while saying the phonetic sounds aloud. Visual rhythm builds memory.</p></div>
+          <div class="info-card"><h3>6. Mathematics Strategies</h3><p>Use graph paper to align columns cleanly. Utilize physical counters, color-coded arithmetic steps, and formula reminder cards.</p></div>
+          <div class="info-card"><h3>7. Memory & Mnemonics</h3><p>Create quirky rhymes, acronyms, and flashcards with sketches to remember complex scientific classifications or historical dates.</p></div>
+          <div class="info-card"><h3>8. Time Management (Pomodoro)</h3><p>Work for 25 focused minutes followed by a 5-minute break away from screens. Regular resets maintain high mental stamina.</p></div>
+          <div class="info-card"><h3>9. Exam Prep & Accommodations</h3><p>Practice with past papers under untimed conditions first. Understand your legal rights to extra time or a reader/scribe during board exams.</p></div>
+          <div class="info-card"><h3>10. Scheduled Rest</h3><p>Sleep is when your brain consolidates memory. Prioritize 8 hours of sleep and physical movement during intense study weeks.</p></div>
+          <div class="info-card"><h3>11. Asking for Clarification</h3><p>It is a sign of strength, not weakness, to tell your teacher: "Could you please explain that concept with an everyday example?"</p></div>
+          <div class="info-card"><h3>12. Self-Advocacy</h3><p>Learn to explain your learning strengths and the tools that help you succeed. Your voice shapes an inclusive classroom.</p></div>
         </div>
       </section>
     </main>
@@ -70,32 +92,41 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <h3>LearnAble – Learning Disability Awareness & Support</h3>
-          <p>This platform is an educational awareness resource and does not provide diagnosis or clinical advice.</p>
+          <div class="footer-brand">
+            <span class="footer-logo-mark" aria-hidden="true"></span>
+            <div class="footer-brand-text">
+              <h3 data-i18n="brand.title">LearnAble</h3>
+              <p class="footer-tagline" data-i18n="brand.subtitle">Learning Disability Awareness & Support</p>
+            </div>
+          </div>
+          <p data-i18n="footer.mission">LearnAble is a Community Engagement Project (B.Sc. IT) dedicated to building inclusive understanding, practical strategies, and verified support resources for learning differences.</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-i18n="footer.quickLinks">Quick Links</h4>
           <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+            <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
+            <li><a href="feedback.html" data-i18n="nav.feedback">Feedback</a></li>
+            <li><a href="login.html" data-i18n="nav.admin">Admin Portal</a></li>
           </ul>
         </div>
         <div>
-          <h4>Project</h4>
-          <p>Community Engagement Project | B.Sc. IT</p>
+          <h4 data-i18n="footer.project">Academic Project</h4>
+          <p data-i18n="footer.projectSub">Community Engagement Project | B.Sc. IT</p>
+          <p data-i18n="footer.rights" style="font-size: 0.85rem; color: var(--gray-400);">Educational Open Source Project.</p>
         </div>
       </div>
     </footer>
 
     <div class="accessibility-toolbar" aria-label="Accessibility toolbar">
-      <button type="button" id="increaseText">A+</button>
-      <button type="button" id="decreaseText">A-</button>
-      <button type="button" id="toggleContrast">High Contrast</button>
-      <button type="button" id="resetAccessibility">Reset</button>
+      <button type="button" id="increaseText" aria-label="Increase text size">A+</button>
+      <button type="button" id="decreaseText" aria-label="Decrease text size">A-</button>
+      <button type="button" id="toggleContrast" aria-label="Toggle high contrast">High Contrast</button>
+      <button type="button" id="resetAccessibility" aria-label="Reset accessibility settings">Reset</button>
     </div>
 
+    <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
     <script src="js/accessibility.js"></script>
   </body>

@@ -7,9 +7,9 @@
       name="description"
       content="LearnAble is a community awareness and support portal for understanding learning differences, assessment guidance, and educational resources."
     />
-    <title>LearnAble | Learning Disability Awareness & Support</title>
+    <title>LearnAble | Learning Disability Awareness & Support Portal</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
-    <link rel="icon" href="images/hero-illustration.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -20,34 +20,45 @@
         <a class="brand" href="index.html" aria-label="LearnAble home">
           <span class="brand-mark">L</span>
           <span>
-            <strong>LearnAble</strong>
-            <small>Learning Disability Awareness & Support</small>
+            <strong data-i18n="brand.title">LearnAble</strong>
+            <small data-i18n="brand.subtitle">Learning Disability Awareness & Support</small>
           </span>
         </a>
 
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
 
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="index.html" class="active">Home</a>
-          <a href="about.html">About</a>
-          <a href="learning-areas.html">Learning Areas</a>
-          <a href="assessment.html">Assessment Guide</a>
-          <a href="learner.html">Learner Support</a>
-          <a href="parent.html">Parent Support</a>
-          <a href="educator.html">Educator Support</a>
-          <a href="activities.html">Activities</a>
-          <a href="resources.html">Resources</a>
-          <a href="faq.html">FAQ</a>
-          <a href="feedback.html">Feedback</a>
+          <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+          <a href="about.html" data-i18n="nav.about">About</a>
+          <a href="learning-areas.html" data-i18n="nav.learningAreas">Learning Areas</a>
+          <a href="assessment.html" data-i18n="nav.assessment">Assessment Guide</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+              <span data-i18n="nav.support">Support Pathways</span> ▾
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="learner.html" data-i18n="nav.learner">Learner Support</a>
+              <a href="parent.html" data-i18n="nav.parent">Parent Support</a>
+              <a href="educator.html" data-i18n="nav.educator">Educator Support</a>
+            </div>
+          </div>
+          <a href="activities.html" data-i18n="nav.activities">Activities</a>
+          <a href="resources.html" data-i18n="nav.resources">Resources</a>
+          <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+          <a href="feedback.html" data-i18n="nav.feedback">Feedback</a>
         </nav>
 
         <div class="toolbar-group">
           <label class="language-selector" aria-label="Language selector">
-            <span>Language</span>
+            <span>🌐</span>
             <select id="languageSelector">
               <option value="en">English</option>
-              <option value="mr">Marathi</option>
-              <option value="hi">Hindi</option>
+              <option value="hi">हिंदी</option>
+              <option value="mr">मराठी</option>
             </select>
           </label>
         </div>
@@ -58,25 +69,28 @@
       <section class="hero">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Community Engagement Project</p>
+            <p class="eyebrow">Community Engagement Project | B.Sc. IT</p>
             <h1>Understanding Learning Differences Starts With Awareness</h1>
             <p class="lead">
-              Learn about learning disabilities, explore educational support resources,
-              understand the assessment pathway, and find verified support information.
+              Learn about learning disabilities, explore evidence-based educational strategies,
+              understand the assessment pathway, and connect with verified support resources.
             </p>
             <div class="hero-actions">
-              <a href="#user-help" class="btn btn-primary">I’m a Learner</a>
-              <a href="#user-help" class="btn btn-secondary">I’m a Parent/Caregiver</a>
-              <a href="#user-help" class="btn btn-secondary">I’m an Educator</a>
-              <a href="resources.html" class="btn btn-outline">Explore Resources</a>
+              <a href="learner.html" class="btn btn-primary">I'm a Learner</a>
+              <a href="parent.html" class="btn btn-secondary">I'm a Parent / Caregiver</a>
+              <a href="educator.html" class="btn btn-secondary">I'm an Educator</a>
+              <a href="resources.html" class="btn btn-outline" data-i18n="btn.viewResources">Explore Resources</a>
             </div>
             <div class="disclaimer-box" role="note" aria-label="Important health and information disclaimer">
-              This portal provides educational awareness and does not diagnose learning disabilities. If you have concerns, consult a qualified professional.
+              <strong data-i18n="disclaimer.title">Important Educational Disclaimer:</strong>
+              <span data-i18n="disclaimer.body">
+                This portal is for educational awareness and guidance only. It does NOT provide clinical diagnosis, medical evaluation, or treatment. For formal diagnosis, always consult a qualified clinical psychologist, special educator, or developmental pediatrician.
+              </span>
             </div>
           </div>
 
           <div class="hero-visual" aria-label="Illustration representing educational support and awareness">
-            <img src="images/hero-illustration.svg" alt="Illustration of learners, teachers, and support resources" />
+            <img src="images/hero-illustration.svg" alt="Illustration of learners, teachers, and support resources" width="800" height="565" />
           </div>
         </div>
       </section>
@@ -84,27 +98,27 @@
       <section id="user-help" class="section section-soft">
         <div class="container">
           <div class="section-heading center">
-            <p class="eyebrow">How can we help you?</p>
-            <h2>Choose your support pathway</h2>
+            <p class="eyebrow">Personalized Guidance</p>
+            <h2>Choose Your Support Pathway</h2>
           </div>
 
           <div class="card-grid three-up">
             <a class="info-card" href="learner.html">
-              <div class="icon-badge">🎓</div>
-              <h3>I am a Learner</h3>
-              <p>Study strategies, reading and writing support, exam planning, and confidence-building tips.</p>
+              <div class="icon-badge" style="font-size: 2rem;">🎓</div>
+              <h3 data-i18n="nav.learner">I am a Learner</h3>
+              <p>Study strategies, reading and writing accommodations, memory techniques, and exam confidence-building tips.</p>
             </a>
 
             <a class="info-card" href="parent.html">
-              <div class="icon-badge">👨‍👩‍👧</div>
-              <h3>I am a Parent/Caregiver</h3>
-              <p>Gain practical guidance on communication, support at home, and understanding assessment.</p>
+              <div class="icon-badge" style="font-size: 2rem;">👨‍👩‍👧</div>
+              <h3 data-i18n="nav.parent">I am a Parent / Caregiver</h3>
+              <p>Practical guidance on positive communication, supportive homework routines, and navigating professional assessment.</p>
             </a>
 
             <a class="info-card" href="educator.html">
-              <div class="icon-badge">🧑‍🏫</div>
-              <h3>I am an Educator</h3>
-              <p>Use inclusive classroom strategies, differentiated learning, and parent collaboration ideas.</p>
+              <div class="icon-badge" style="font-size: 2rem;">👩‍🏫</div>
+              <h3 data-i18n="nav.educator">I am an Educator</h3>
+              <p>Inclusive classroom methods, differentiated instruction techniques, and collaborative parent-teacher strategies.</p>
             </a>
           </div>
         </div>
@@ -113,27 +127,26 @@
       <section class="section">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">What are learning disabilities?</p>
-            <h2>Understanding the basics</h2>
+            <p class="eyebrow">Core Understanding</p>
+            <h2>What Are Learning Disabilities?</h2>
           </div>
 
           <div class="text-grid two-up">
             <div>
               <p>
-                A learning disability is a difference in how a person learns and processes information.
-                It may affect reading, writing, spelling, comprehension, or mathematics. These difficulties
-                may be persistent and may impact school performance, but they do not indicate low intelligence.
+                A learning disability is a neurological difference in how an individual's brain receives,
+                processes, and communicates information. It may affect reading (dyslexia), writing (dysgraphia),
+                or mathematical calculations (dyscalculia).
               </p>
               <p>
-                Learning difficulties can sometimes be temporary, but persistent difficulty across time,
-                settings, and tasks may need professional guidance and individualized support.
+                These difficulties are persistent and may impact academic performance, but they do <strong>NOT</strong> indicate
+                low intelligence or lack of motivation. With early identification and structured accommodations, students thrive.
               </p>
             </div>
             <div class="highlight-box">
-              <h3>Key message</h3>
+              <h3>Key Takeaway</h3>
               <p>
-                A child may experience difficulty in one area without having low capability. Support should be
-                individualized, respectful, and based on observation and professional assessment.
+                Intelligence and learning speed are independent. A student facing challenges in one specific academic area can have exceptional capabilities in creative thinking, visual problem solving, or leadership.
               </p>
             </div>
           </div>
@@ -143,16 +156,16 @@
       <section class="section section-soft">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Common learning areas</p>
-            <h2>Where difficulty may appear</h2>
+            <p class="eyebrow">Academic Impact</p>
+            <h2>Common Learning Areas</h2>
           </div>
 
           <div class="card-grid five-up">
-            <div class="mini-card"><h3>Reading</h3><p>Possible difficulty decoding words and understanding text.</p></div>
-            <div class="mini-card"><h3>Writing</h3><p>Possible difficulty organizing ideas or expressing them clearly.</p></div>
-            <div class="mini-card"><h3>Spelling</h3><p>Possible difficulty recalling letter patterns and word forms.</p></div>
-            <div class="mini-card"><h3>Comprehension</h3><p>Possible difficulty understanding instructions or meaning.</p></div>
-            <div class="mini-card"><h3>Mathematics</h3><p>Possible difficulty with number sense, calculation, or problem-solving.</p></div>
+            <div class="info-card"><h3>Reading</h3><p>Possible difficulty decoding phonics, reading fluency, and text comprehension.</p></div>
+            <div class="info-card"><h3>Writing</h3><p>Possible difficulty with letter formation, spatial spacing, or written expression.</p></div>
+            <div class="info-card"><h3>Spelling</h3><p>Possible difficulty recalling phoneme patterns and visual word memory.</p></div>
+            <div class="info-card"><h3>Comprehension</h3><p>Possible difficulty retaining multi-step verbal or written instructions.</p></div>
+            <div class="info-card"><h3>Mathematics</h3><p>Possible difficulty with number sense, arithmetic facts, or time concepts.</p></div>
           </div>
         </div>
       </section>
@@ -160,26 +173,26 @@
       <section class="section">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">How we can help</p>
-            <h2>Support that is clear, respectful, and practical</h2>
+            <p class="eyebrow">Our Mission</p>
+            <h2>Support That Is Clear, Respectful, and Practical</h2>
           </div>
 
           <div class="card-grid four-up">
-            <div class="info-card small-card">
+            <div class="info-card">
               <h3>Awareness</h3>
-              <p>Simple information on learning differences and common misconceptions.</p>
+              <p>Accessible information demystifying learning differences and breaking stigma.</p>
             </div>
-            <div class="info-card small-card">
+            <div class="info-card">
               <h3>Pathway</h3>
-              <p>Guidance about when to talk to a teacher, parent, or qualified professional.</p>
+              <p>Clear step-by-step guidance on when and how to seek qualified professional assessment.</p>
             </div>
-            <div class="info-card small-card">
+            <div class="info-card">
               <h3>Support</h3>
-              <p>Individualized classroom, home, and study strategies for learner success.</p>
+              <p>Evidence-based strategies tailored for classrooms, home environments, and independent study.</p>
             </div>
-            <div class="info-card small-card">
+            <div class="info-card">
               <h3>Resources</h3>
-              <p>Verified information and support options from reliable sources.</p>
+              <p>Curated directory of verified government, NGO, and academic support organizations.</p>
             </div>
           </div>
         </div>
@@ -188,95 +201,79 @@
       <section class="section section-soft">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Assessment pathway</p>
-            <h2>What the process may involve</h2>
+            <p class="eyebrow">Structured Process</p>
+            <h2>The 8-Step Assessment Pathway</h2>
           </div>
 
           <div class="timeline">
-            <div class="timeline-item"><span>1</span><p>Notice persistent learning difficulty</p></div>
-            <div class="timeline-item"><span>2</span><p>Talk to parent or teacher</p></div>
-            <div class="timeline-item"><span>3</span><p>Seek qualified professional guidance</p></div>
-            <div class="timeline-item"><span>4</span><p>Professional assessment</p></div>
-            <div class="timeline-item"><span>5</span><p>Understand assessment results</p></div>
-            <div class="timeline-item"><span>6</span><p>Recommendations and support</p></div>
-            <div class="timeline-item"><span>7</span><p>Educational or remedial support</p></div>
-            <div class="timeline-item"><span>8</span><p>Follow-up and collaboration</p></div>
+            <div class="timeline-item"><span>1</span><p><strong>Notice persistent difficulty:</strong> Observe ongoing struggles across multiple assignments and settings.</p></div>
+            <div class="timeline-item"><span>2</span><p><strong>Initial dialogue:</strong> Collaborative conversation between parents, class teachers, and the student.</p></div>
+            <div class="timeline-item"><span>3</span><p><strong>Classroom accommodations:</strong> Implementing targeted multi-sensory teaching adjustments.</p></div>
+            <div class="timeline-item"><span>4</span><p><strong>Professional consultation:</strong> Engaging clinical psychologists or certified special educators.</p></div>
+            <div class="timeline-item"><span>5</span><p><strong>Formal psycho-educational evaluation:</strong> Comprehensive standardized assessment battery.</p></div>
+            <div class="timeline-item"><span>6</span><p><strong>Understanding results:</strong> Reviewing the diagnostic profile with a strengths-based approach.</p></div>
+            <div class="timeline-item"><span>7</span><p><strong>Remedial intervention & IEP:</strong> Tailoring individualized educational plans and board concessions.</p></div>
+            <div class="timeline-item"><span>8</span><p><strong>Ongoing review:</strong> Regular progress monitoring and positive reinforcement.</p></div>
           </div>
 
-          <p class="note-block">
-            The website does not perform diagnosis or replace professional assessment.
-          </p>
+          <div class="disclaimer-box">
+            <strong>Important:</strong> LearnAble is an informational awareness portal and does NOT perform clinical testing or diagnosis.
+          </div>
         </div>
       </section>
 
       <section class="section">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Learning & awareness activity</p>
-            <h2>Try a short interactive activity</h2>
+            <p class="eyebrow">Interactive Module</p>
+            <h2 data-i18n="quiz.heading">Learning Differences Awareness Activity</h2>
           </div>
 
           <div class="cta-box">
-            <p>Explore a simple educational activity designed to build awareness without diagnosing.</p>
-            <a href="activities.html" class="btn btn-primary">Start the activity</a>
+            <p data-i18n="quiz.subheading">Engage with a 10-question educational awareness quiz to test your understanding of learning differences, myths, and supportive strategies.</p>
+            <a href="activities.html" class="btn btn-primary" data-i18n="btn.startActivity">Start the Activity</a>
           </div>
         </div>
       </section>
 
-      <section class="section section-soft">
+      <section class="section section-soft" id="faq-home">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Verified resources</p>
-            <h2>Explore reliable support links</h2>
-          </div>
-
-          <div class="card-grid four-up">
-            <div class="mini-card"><h3>Assessment</h3><p>Qualified professional pathways and support guidance.</p></div>
-            <div class="mini-card"><h3>Learning Support</h3><p>Strategies for reading, writing, spelling, and mathematics.</p></div>
-            <div class="mini-card"><h3>Parent Support</h3><p>Helpful home routines and communication tools.</p></div>
-            <div class="mini-card"><h3>Teacher Support</h3><p>Inclusive classroom methods and positive practices.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="faq-home">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">FAQ</p>
-            <h2>Common questions</h2>
+            <p class="eyebrow">Frequently Asked Questions</p>
+            <h2>Common Questions & Facts</h2>
           </div>
 
           <div class="faq-list">
             <details open>
               <summary>What is a learning disability?</summary>
-              <p>It is a difference in how a person processes and learns information, which may affect reading, writing, spelling, comprehension, or mathematics.</p>
+              <p>It is a neurodevelopmental difference in how the brain processes, stores, and communicates information. It commonly affects reading, writing, spelling, comprehension, or mathematical concepts.</p>
             </details>
             <details>
-              <summary>Does a learning disability mean low intelligence?</summary>
-              <p>No. A learning difference does not indicate low intelligence. It suggests an individual may need support that matches their learning profile.</p>
+              <summary>Does having a learning disability mean low intelligence?</summary>
+              <p>No. People with learning differences have average to above-average intelligence. With structured instruction and accommodations, they achieve remarkable success across academic and professional fields.</p>
             </details>
             <details>
-              <summary>Who can assess learning difficulties?</summary>
-              <p>Qualified educational psychologists, special educators, and other trained professionals may assess concerns and guide next steps.</p>
+              <summary>Who is qualified to conduct an assessment?</summary>
+              <p>Formal assessments are conducted by licensed clinical psychologists, neuropsychologists, and certified special educators working in authorized hospitals, clinics, and government child development centers.</p>
             </details>
             <details>
               <summary>Can this website diagnose a learning disability?</summary>
-              <p>No. This portal is educational and informational only. It does not diagnose or replace professional assessment.</p>
+              <p>No. LearnAble is strictly an educational awareness resource. It does not provide clinical diagnosis or replace formal evaluation.</p>
             </details>
           </div>
         </div>
       </section>
 
-      <section class="section section-soft">
+      <section class="section">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Feedback and questions</p>
-            <h2>We value your input</h2>
+            <p class="eyebrow">Community Collaboration</p>
+            <h2 data-i18n="feedback.heading">Community Feedback</h2>
           </div>
 
           <div class="cta-box">
-            <p>Share feedback about what information would help families, students, and teachers most.</p>
-            <a href="feedback.html" class="btn btn-primary">Give Feedback</a>
+            <p data-i18n="feedback.subheading">Help us improve by sharing your thoughts, experiences, and suggestions for new educational materials.</p>
+            <a href="feedback.html" class="btn btn-primary" data-i18n="btn.submitFeedback">Share Your Feedback</a>
           </div>
         </div>
       </section>
@@ -285,45 +282,44 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <h3>LearnAble – Learning Disability Awareness & Support</h3>
-          <p>This platform is an educational awareness resource and does not provide diagnosis or clinical advice.</p>
+          <div class="footer-brand">
+            <span class="footer-logo-mark" aria-hidden="true"></span>
+            <div class="footer-brand-text">
+              <h3 data-i18n="brand.title">LearnAble</h3>
+              <p class="footer-tagline" data-i18n="brand.subtitle">Learning Disability Awareness &amp; Support</p>
+            </div>
+          </div>
+          <p data-i18n="footer.mission">LearnAble is a Community Engagement Project (B.Sc. IT) dedicated to building inclusive understanding, practical strategies, and verified support resources for learning differences.</p>
         </div>
 
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-i18n="footer.quickLinks">Quick Links</h4>
           <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+            <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
+            <li><a href="feedback.html" data-i18n="nav.feedback">Feedback</a></li>
+            <li><a href="login.html" data-i18n="nav.admin">Admin Portal</a></li>
           </ul>
         </div>
 
         <div>
-          <h4>Project</h4>
-          <p>Community Engagement Project | B.Sc. IT</p>
-          <p><a href="login.html">Admin Login</a></p>
+          <h4 data-i18n="footer.project">Academic Project</h4>
+          <p data-i18n="footer.projectSub">Community Engagement Project | B.Sc. IT</p>
+          <p data-i18n="footer.rights" style="font-size: 0.85rem; color: var(--gray-400);">Educational Open Source Project.</p>
         </div>
       </div>
     </footer>
 
     <div class="accessibility-toolbar" aria-label="Accessibility toolbar">
-      <button type="button" id="increaseText">A+</button>
-      <button type="button" id="decreaseText">A-</button>
-      <button type="button" id="toggleContrast">High Contrast</button>
-      <button type="button" id="resetAccessibility">Reset</button>
+      <button type="button" id="increaseText" aria-label="Increase text size">A+</button>
+      <button type="button" id="decreaseText" aria-label="Decrease text size">A-</button>
+      <button type="button" id="toggleContrast" aria-label="Toggle high contrast">High Contrast</button>
+      <button type="button" id="resetAccessibility" aria-label="Reset accessibility settings">Reset</button>
     </div>
 
+    <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
     <script src="js/accessibility.js"></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./service-worker.js').catch(() => {
-            console.info('Service worker registration skipped in this environment.');
-          });
-        });
-      }
-    </script>
   </body>
 </html>

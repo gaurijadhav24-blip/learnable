@@ -1,0 +1,17 @@
+{
+  "name": "LearnAble - Learning Disability Awareness & Support Portal",
+  "short_name": "LearnAble",
+  "description": "Educational awareness and support portal for learning differences, assessment pathways, and verified community resources.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "images/hero-illustration.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

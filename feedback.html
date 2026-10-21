@@ -3,39 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Share your feedback, ideas, and suggestions to help improve the LearnAble Community Engagement Portal." />
     <title>Feedback | LearnAble</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+
     <header class="site-header">
       <div class="container nav-wrapper">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="LearnAble home">
           <span class="brand-mark">L</span>
-          <span><strong>LearnAble</strong><small>Learning Disability Awareness & Support</small></span>
+          <span>
+            <strong data-i18n="brand.title">LearnAble</strong>
+            <small data-i18n="brand.subtitle">Learning Disability Awareness & Support</small>
+          </span>
         </a>
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="learning-areas.html">Learning Areas</a>
-          <a href="assessment.html">Assessment Guide</a>
-          <a href="learner.html">Learner Support</a>
-          <a href="parent.html">Parent Support</a>
-          <a href="educator.html">Educator Support</a>
-          <a href="activities.html">Activities</a>
-          <a href="resources.html">Resources</a>
-          <a href="faq.html">FAQ</a>
-          <a href="feedback.html" class="active">Feedback</a>
+          <a href="index.html" data-i18n="nav.home">Home</a>
+          <a href="about.html" data-i18n="nav.about">About</a>
+          <a href="learning-areas.html" data-i18n="nav.learningAreas">Learning Areas</a>
+          <a href="assessment.html" data-i18n="nav.assessment">Assessment Guide</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+              <span data-i18n="nav.support">Support Pathways</span> ▾
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="learner.html" data-i18n="nav.learner">Learner Support</a>
+              <a href="parent.html" data-i18n="nav.parent">Parent Support</a>
+              <a href="educator.html" data-i18n="nav.educator">Educator Support</a>
+            </div>
+          </div>
+          <a href="activities.html" data-i18n="nav.activities">Activities</a>
+          <a href="resources.html" data-i18n="nav.resources">Resources</a>
+          <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+          <a href="feedback.html" class="active" data-i18n="nav.feedback">Feedback</a>
         </nav>
+
         <div class="toolbar-group">
-          <label class="language-selector">
-            <span>Language</span>
+          <label class="language-selector" aria-label="Language selector">
+            <span>🌐</span>
             <select id="languageSelector">
               <option value="en">English</option>
-              <option value="mr">Marathi</option>
-              <option value="hi">Hindi</option>
+              <option value="hi">हिंदी</option>
+              <option value="mr">मराठी</option>
             </select>
           </label>
         </div>
@@ -46,70 +66,119 @@
       <section class="page-hero">
         <div class="container narrow">
           <p class="eyebrow">Module 10</p>
-          <h1>Feedback</h1>
-          <p>Help us improve by sharing your thoughts and suggestions.</p>
+          <h1 data-i18n="feedback.heading">Community Feedback</h1>
+          <p data-i18n="feedback.subheading">Help us improve by sharing your thoughts, experiences, and suggestions.</p>
         </div>
       </section>
 
       <section class="section">
         <div class="container narrow">
-          <div id="feedbackForm" class="form-container">
-            <form id="userFeedbackForm" onsubmit="handleFeedbackSubmit(event)">
-              <div class="form-group">
-                <label for="feedbackName">Name (optional)</label>
-                <input type="text" id="feedbackName" name="name" maxlength="100" aria-label="Your name" />
+          <div id="feedbackFormContainer" class="form-container">
+            <div id="feedbackErrorContainer" class="error-box hidden" role="alert" style="margin-bottom: 1.25rem;"></div>
+
+            <form id="userFeedbackForm" novalidate>
+              <!-- Anti-Spam Honeypot Field (Invisible to human users) -->
+              <div style="display: none;" aria-hidden="true">
+                <label for="hp_field">Do not fill this field</label>
+                <input type="text" id="hp_field" name="hp_field" tabindex="-1" autocomplete="off" />
               </div>
 
               <div class="form-group">
-                <label for="feedbackUserType">Who are you? *</label>
+                <label for="feedbackName" data-i18n="feedback.nameLabel">Your Name (Optional)</label>
+                <input
+                  type="text"
+                  id="feedbackName"
+                  name="name"
+                  maxlength="100"
+                  placeholder="e.g., Rohit Sharma (Leave blank for Anonymous)"
+                  aria-label="Your name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="feedbackUserType" data-i18n="feedback.roleLabel">Who are you? *</label>
                 <select id="feedbackUserType" name="userType" required aria-label="Select your user type">
-                  <option value="">-- Select --</option>
-                  <option value="Learner">I am a Learner</option>
-                  <option value="Parent">I am a Parent/Caregiver</option>
-                  <option value="Educator">I am an Educator</option>
-                  <option value="Other">Other</option>
+                  <option value="" data-i18n="feedback.roleSelect">-- Select your role --</option>
+                  <option value="Learner" data-i18n="feedback.roleLearner">I am a Learner / Student</option>
+                  <option value="Parent" data-i18n="feedback.roleParent">I am a Parent / Caregiver</option>
+                  <option value="Educator" data-i18n="feedback.roleEducator">I am an Educator / Teacher</option>
+                  <option value="Other" data-i18n="feedback.roleOther">Other Community Member</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label for="feedbackRating">How helpful was this portal? *</label>
-                <div class="rating-options">
-                  <input type="radio" id="rating1" name="rating" value="1" required />
-                  <label for="rating1">1 - Not helpful</label>
-                  <input type="radio" id="rating2" name="rating" value="2" />
-                  <label for="rating2">2 - Somewhat helpful</label>
-                  <input type="radio" id="rating3" name="rating" value="3" />
-                  <label for="rating3">3 - Helpful</label>
-                  <input type="radio" id="rating4" name="rating" value="4" />
-                  <label for="rating4">4 - Very helpful</label>
-                  <input type="radio" id="rating5" name="rating" value="5" />
-                  <label for="rating5">5 - Extremely helpful</label>
+                <label data-i18n="feedback.ratingLabel">How helpful was this portal? *</label>
+                <div class="rating-options" role="radiogroup" aria-label="Rating out of 5">
+                  <label for="rating1">
+                    <input type="radio" id="rating1" name="rating" value="1" required />
+                    <span data-i18n="feedback.rating1">1 - Not helpful</span>
+                  </label>
+                  <label for="rating2">
+                    <input type="radio" id="rating2" name="rating" value="2" />
+                    <span data-i18n="feedback.rating2">2 - Somewhat helpful</span>
+                  </label>
+                  <label for="rating3">
+                    <input type="radio" id="rating3" name="rating" value="3" />
+                    <span data-i18n="feedback.rating3">3 - Helpful</span>
+                  </label>
+                  <label for="rating4">
+                    <input type="radio" id="rating4" name="rating" value="4" />
+                    <span data-i18n="feedback.rating4">4 - Very helpful</span>
+                  </label>
+                  <label for="rating5">
+                    <input type="radio" id="rating5" name="rating" value="5" />
+                    <span data-i18n="feedback.rating5">5 - Extremely helpful</span>
+                  </label>
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="feedbackText">Your Feedback *</label>
-                <textarea id="feedbackText" name="feedback" rows="6" required maxlength="1000" placeholder="Please share your thoughts..." aria-label="Your feedback"></textarea>
-                <small>Maximum 1000 characters</small>
+                <label for="feedbackText" data-i18n="feedback.textLabel">Your Feedback *</label>
+                <textarea
+                  id="feedbackText"
+                  name="feedback"
+                  rows="5"
+                  required
+                  maxlength="1000"
+                  placeholder="Please share your thoughts on the portal content and usability..."
+                  aria-label="Your feedback"
+                ></textarea>
+                <small data-i18n="feedback.charLimit1000">Maximum 1000 characters</small>
               </div>
 
               <div class="form-group">
-                <label for="feedbackSuggestions">What information would you like us to add?</label>
-                <textarea id="feedbackSuggestions" name="suggestions" rows="4" maxlength="500" placeholder="Your suggestions..." aria-label="Suggestions for improvement"></textarea>
-                <small>Maximum 500 characters</small>
+                <label for="feedbackSuggestions" data-i18n="feedback.suggestLabel">What topics or resources should we add?</label>
+                <textarea
+                  id="feedbackSuggestions"
+                  name="suggestions"
+                  rows="3"
+                  maxlength="500"
+                  placeholder="Suggest new learning strategies, local organizations, or features..."
+                  aria-label="Suggestions for improvement"
+                ></textarea>
+                <small data-i18n="feedback.charLimit500">Maximum 500 characters</small>
               </div>
 
-              <div class="form-group privacy-notice">
-                <p>We do not collect unnecessary sensitive or child information. Your feedback helps us improve this educational platform.</p>
+              <div class="form-group privacy-notice" style="background: var(--bg-soft); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border-color);">
+                <p data-i18n="feedback.privacyNote" style="margin: 0; font-size: 0.88rem;">
+                  🔒 Privacy Notice: We do not collect unnecessary sensitive child information or personal data. Your feedback helps us improve this educational platform.
+                </p>
               </div>
 
-              <button type="submit" class="btn btn-primary">Submit Feedback</button>
+              <button type="submit" id="feedbackSubmitBtn" class="btn btn-primary" data-i18n="btn.submitFeedback">
+                Submit Feedback
+              </button>
             </form>
 
             <div id="feedbackSuccess" class="success-message hidden">
-              <h2>Thank you for your feedback!</h2>
-              <p>Your input helps us improve the LearnAble platform and better support learners, parents, and educators.</p>
-              <a href="index.html" class="btn btn-primary">Back to Home</a>
+              <h2 data-i18n="feedback.successTitle">Thank You for Your Feedback!</h2>
+              <p data-i18n="feedback.successBody">
+                Your input helps us improve the LearnAble platform and better support learners, parents, and educators.
+              </p>
+              <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="btn btn-primary" data-i18n="btn.backHome">Back to Home</a>
+                <a href="resources.html" class="btn btn-outline" data-i18n="btn.viewResources">View Resources</a>
+              </div>
             </div>
           </div>
         </div>
@@ -119,32 +188,45 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <h3>LearnAble – Learning Disability Awareness & Support</h3>
-          <p>This platform is an educational awareness resource and does not provide diagnosis or clinical advice.</p>
+          <div class="footer-brand">
+            <span class="footer-logo-mark" aria-hidden="true"></span>
+            <div class="footer-brand-text">
+              <h3 data-i18n="brand.title">LearnAble</h3>
+              <p class="footer-tagline" data-i18n="brand.subtitle">Learning Disability Awareness & Support</p>
+            </div>
+          </div>
+          <p data-i18n="footer.mission">LearnAble is a Community Engagement Project (B.Sc. IT) dedicated to building inclusive understanding, practical strategies, and verified support resources for learning differences.</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-i18n="footer.quickLinks">Quick Links</h4>
           <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+            <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
+            <li><a href="feedback.html" data-i18n="nav.feedback">Feedback</a></li>
+            <li><a href="login.html" data-i18n="nav.admin">Admin Portal</a></li>
           </ul>
         </div>
         <div>
-          <h4>Project</h4>
-          <p>Community Engagement Project | B.Sc. IT</p>
+          <h4 data-i18n="footer.project">Academic Project</h4>
+          <p data-i18n="footer.projectSub">Community Engagement Project | B.Sc. IT</p>
+          <p data-i18n="footer.rights" style="font-size: 0.85rem; color: var(--gray-400);">Educational Open Source Project.</p>
         </div>
       </div>
     </footer>
 
     <div class="accessibility-toolbar" aria-label="Accessibility toolbar">
-      <button type="button" id="increaseText">A+</button>
-      <button type="button" id="decreaseText">A-</button>
-      <button type="button" id="toggleContrast">High Contrast</button>
-      <button type="button" id="resetAccessibility">Reset</button>
+      <button type="button" id="increaseText" aria-label="Increase text size">A+</button>
+      <button type="button" id="decreaseText" aria-label="Decrease text size">A-</button>
+      <button type="button" id="toggleContrast" aria-label="Toggle high contrast">High Contrast</button>
+      <button type="button" id="resetAccessibility" aria-label="Reset accessibility settings">Reset</button>
     </div>
 
+    <!-- Pinned Supabase Client & App Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
     <script src="js/feedback.js"></script>
     <script src="js/accessibility.js"></script>

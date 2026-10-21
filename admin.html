@@ -4,97 +4,411 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard | LearnAble</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Admin Specific Responsive Styles */
+      .admin-layout {
+        display: flex;
+        min-height: 100vh;
+        background: #f8fafc;
+      }
+      .admin-sidebar {
+        width: 260px;
+        background: #ffffff;
+        border-right: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        z-index: 100;
+      }
+      .admin-brand-header {
+        padding: 1.5rem 1.25rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .admin-nav-menu {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0.75rem;
+        gap: 0.25rem;
+        flex: 1;
+        overflow-y: auto;
+      }
+      .admin-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius);
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: var(--transition);
+        border: none;
+        background: transparent;
+        text-align: left;
+        cursor: pointer;
+        width: 100%;
+      }
+      .admin-nav-item:hover,
+      .admin-nav-item.active {
+        background: #eef2ff;
+        color: var(--primary);
+      }
+      .admin-nav-item.logout-item {
+        margin-top: auto;
+        color: var(--danger);
+      }
+      .admin-nav-item.logout-item:hover {
+        background: #fef2f2;
+      }
+      .admin-body {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .admin-top-bar {
+        background: #ffffff;
+        padding: 1rem 1.75rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .admin-user-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .admin-badge-verified {
+        background: #dcfce7;
+        color: #166534;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.78rem;
+      }
+      .admin-content-area {
+        padding: 1.75rem;
+        flex: 1;
+      }
+      .admin-tab-pane {
+        display: none;
+      }
+      .admin-tab-pane.active {
+        display: block;
+      }
+      .stats-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+      }
+      .admin-stat-box {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+      }
+      .stat-number {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        line-height: 1.2;
+      }
+      .stat-label {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-top: 0.35rem;
+      }
+      .stat-detail {
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+      .table-responsive-wrapper {
+        overflow-x: auto;
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+        margin-top: 1rem;
+        -webkit-overflow-scrolling: touch;
+      }
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.92rem;
+      }
+      .admin-table th {
+        background: var(--gray-50);
+        padding: 0.9rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--gray-700);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .admin-table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        vertical-align: top;
+      }
+      .admin-table tr:hover {
+        background: #f8fafc;
+      }
+      .action-btns-group {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .admin-filter-bar {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.25rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .admin-filter-inputs {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        flex: 1;
+      }
+      .admin-filter-inputs input,
+      .admin-filter-inputs select {
+        padding: 0.55rem 0.85rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+      }
+
+      /* Unauthorized Banner Box */
+      .unauthorized-card {
+        max-width: 650px;
+        margin: 4rem auto;
+        padding: 2.5rem;
+        background: #ffffff;
+        border-radius: var(--radius);
+        border: 1px solid #fca5a5;
+        box-shadow: var(--shadow-lg);
+        text-align: center;
+      }
+
+      /* Mobile App-style Navigation Bar */
+      @media (max-width: 900px) {
+        .admin-layout {
+          flex-direction: column;
+        }
+        .admin-sidebar {
+          width: 100%;
+          height: auto;
+          position: sticky;
+          top: 0;
+          border-right: none;
+          border-bottom: 1px solid var(--border-color);
+          z-index: 100;
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+        .admin-brand-header {
+          padding: 0.65rem 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .admin-nav-menu {
+          flex-direction: row;
+          overflow-x: auto;
+          padding: 0.5rem 0.85rem;
+          gap: 0.5rem;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+        }
+        .admin-nav-menu::-webkit-scrollbar {
+          display: none;
+        }
+        .admin-nav-item {
+          white-space: nowrap;
+          padding: 0.5rem 0.95rem;
+          font-size: 0.85rem;
+          border-radius: var(--radius-full);
+          border: 1px solid var(--border-color);
+          background: #f8fafc;
+          font-weight: 600;
+          min-height: 38px;
+        }
+        .admin-nav-item.active {
+          background: var(--primary);
+          color: #ffffff;
+          border-color: var(--primary);
+          box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+        }
+        .admin-top-bar {
+          padding: 0.85rem 1rem;
+        }
+        .admin-content-area {
+          padding: 1rem 0.85rem 3rem;
+        }
+        .stats-card-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 0.75rem;
+        }
+        .admin-stat-box {
+          padding: 1rem;
+          border-radius: var(--radius);
+        }
+        .stat-number {
+          font-size: 1.8rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .stats-card-grid {
+          grid-template-columns: 1fr;
+        }
+        .admin-table th, .admin-table td {
+          padding: 0.75rem 0.65rem;
+          font-size: 0.84rem;
+        }
+      }
+    </style>
   </head>
   <body class="admin-page">
-    <div class="admin-container">
+    <div id="unauthorizedView" class="unauthorized-card hidden">
+      <h2 style="color: #991b1b; margin-bottom: 1rem;">Access Restricted</h2>
+      <p id="unauthorizedMsg" style="margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.6;"></p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button onclick="handleAdminLogout()" class="btn btn-primary">Sign Out</button>
+        <a href="SUPABASE_SETUP.md" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Read SUPABASE_SETUP.md (Step 6)</a>
+        <a href="index.html" class="btn btn-outline">Back to Home</a>
+      </div>
+    </div>
+
+    <div id="authorizedApp" class="admin-layout hidden">
+      <!-- Admin Sidebar Navigation -->
       <aside class="admin-sidebar">
-        <div class="admin-header">
-          <a class="brand" href="index.html">
+        <div class="admin-brand-header">
+          <a class="brand" href="index.html" aria-label="LearnAble Home">
             <span class="brand-mark">L</span>
-            <span><strong>LearnAble</strong><small>Admin</small></span>
+            <span>
+              <strong>LearnAble</strong>
+              <small>Admin Dashboard</small>
+            </span>
           </a>
         </div>
-        <nav class="admin-nav">
-          <a href="#dashboard" class="nav-item active">Dashboard</a>
-          <a href="#resources-mgmt" class="nav-item">Manage Resources</a>
-          <a href="#feedback-view" class="nav-item">View Feedback</a>
-          <a href="#activities-view" class="nav-item">View Activities</a>
-          <a href="javascript:handleAdminLogout()" class="nav-item logout">Logout</a>
+        <nav class="admin-nav-menu" aria-label="Admin Navigation">
+          <button class="admin-nav-item active" data-tab="dashboard">
+            <span>📊</span> Dashboard Overview
+          </button>
+          <button class="admin-nav-item" data-tab="resources-mgmt">
+            <span>📚</span> Manage Resources
+          </button>
+          <button class="admin-nav-item" data-tab="feedback-view">
+            <span>💬</span> User Feedback
+          </button>
+          <button class="admin-nav-item" data-tab="activities-view">
+            <span>🎯</span> Quiz Activity
+          </button>
+          <button class="admin-nav-item" data-tab="quiz-questions-mgmt">
+            <span>❓</span> Manage Quiz
+          </button>
+          <a href="index.html" class="admin-nav-item" style="color: var(--gray-700);">
+            <span>🌐</span> Public Portal
+          </a>
+          <button class="admin-nav-item logout-item" onclick="handleAdminLogout()">
+            <span>🚪</span> Sign Out
+          </button>
         </nav>
       </aside>
 
-      <main class="admin-main">
-        <div class="admin-header-bar">
-          <h1>Admin Dashboard</h1>
-          <p>Manage resources, view feedback, and monitor activity.</p>
+      <!-- Main Admin Content Area -->
+      <main class="admin-body">
+        <div class="admin-top-bar">
+          <div>
+            <h1 id="pageSectionTitle" style="font-size: 1.45rem; margin-bottom: 0.15rem;">Admin Dashboard</h1>
+            <p style="color: var(--text-secondary); margin: 0; font-size: 0.88rem;">Live Database Management with Supabase</p>
+          </div>
+          <div class="admin-user-info">
+            <span class="admin-badge-verified">Verified Admin</span>
+            <span id="currentAdminEmail" style="font-weight: 500;">Loading...</span>
+          </div>
         </div>
 
-        <section id="dashboard" class="admin-section active">
-          <h2>Dashboard Overview</h2>
-          <div class="stats-grid">
-            <div class="stat-card">
-              <h3 id="totalResources">0</h3>
-              <p>Total Resources</p>
-            </div>
-            <div class="stat-card">
-              <h3 id="totalFeedback">0</h3>
-              <p>Total Feedback Entries</p>
-            </div>
-            <div class="stat-card">
-              <h3 id="totalActivities">0</h3>
-              <p>Activities Completed</p>
-            </div>
-            <div class="stat-card">
-              <h3>Prototype</h3>
-              <p>Using localStorage</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="resources-mgmt" class="admin-section">
-          <h2>Manage Resources</h2>
-          <div class="resource-management">
-            <div class="form-card">
-              <h3>Add New Resource</h3>
-              <form id="addResourceForm" onsubmit="handleAddResource(event)">
-                <div class="form-group">
-                  <label for="resourceName">Resource Name *</label>
-                  <input type="text" id="resourceName" required />
-                </div>
-                <div class="form-group">
-                  <label for="resourceCategory">Category *</label>
-                  <select id="resourceCategory" required>
-                    <option value="">-- Select --</option>
-                    <option value="Assessment">Assessment</option>
-                    <option value="Learning Support">Learning Support</option>
-                    <option value="Parent Support">Parent Support</option>
-                    <option value="Teacher Support">Teacher Support</option>
-                    <option value="Inclusive Education">Inclusive Education</option>
-                    <option value="Awareness">Awareness</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="resourceDesc">Description *</label>
-                  <textarea id="resourceDesc" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="resourceWebsite">Website/URL *</label>
-                  <input type="url" id="resourceWebsite" required />
-                </div>
-                <div class="form-group">
-                  <label for="resourceSource">Source *</label>
-                  <input type="text" id="resourceSource" required />
-                </div>
-                <button type="submit" class="btn btn-primary">Add Resource</button>
-              </form>
+        <div class="admin-content-area">
+          <!-- 1. DASHBOARD OVERVIEW TAB -->
+          <section id="dashboard" class="admin-tab-pane active">
+            <h2 style="margin-bottom: 1.25rem;">Live Performance & Analytics</h2>
+            
+            <div class="stats-card-grid">
+              <div class="admin-stat-box">
+                <span class="stat-number" id="dashTotalResources">0</span>
+                <span class="stat-label">Verified Resources</span>
+                <span class="stat-detail">Live in Resources Directory</span>
+              </div>
+              <div class="admin-stat-box">
+                <span class="stat-number" id="dashTotalFeedback">0</span>
+                <span class="stat-label">Feedback Submissions</span>
+                <span class="stat-detail" id="dashAvgRating">Avg Rating: -- / 5</span>
+              </div>
+              <div class="admin-stat-box">
+                <span class="stat-number" id="dashTotalAttempts">0</span>
+                <span class="stat-label">Quiz Attempts Completed</span>
+                <span class="stat-detail" id="dashAvgScore">Avg Score: --%</span>
+              </div>
+              <div class="admin-stat-box">
+                <span class="stat-number" style="color: var(--success);" id="dashDbStatus">Active</span>
+                <span class="stat-label">Database Connection</span>
+                <span class="stat-detail">Supabase Cloud PostgreSQL</span>
+              </div>
             </div>
 
-            <div class="resource-list-card">
-              <h3>Resources</h3>
-              <div class="filter-box">
-                <input type="text" id="adminResourceSearch" placeholder="Search resources..." />
+            <!-- Feedback Breakdown by Role -->
+            <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem;">
+              <h3 style="margin-bottom: 1rem;">Community Feedback by User Role</h3>
+              <div id="roleBreakdownList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Recent Activity Teaser -->
+            <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="margin: 0;">Recent Community Feedback</h3>
+                <button class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.85rem;" onclick="switchTab('feedback-view')">View All Feedback →</button>
+              </div>
+              <div id="dashRecentFeedback">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. MANAGE RESOURCES TAB -->
+          <section id="resources-mgmt" class="admin-tab-pane">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+              <div>
+                <h2 style="margin: 0;">Resources Management</h2>
+                <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Add, edit, and curate verified educational resources</p>
+              </div>
+              <button class="btn btn-primary" onclick="openAddResourceModal()">+ Add New Resource</button>
+            </div>
+
+            <div class="admin-filter-bar">
+              <div class="admin-filter-inputs">
+                <input type="text" id="adminResourceSearch" placeholder="Search by title, description or source..." style="min-width: 260px;" />
                 <select id="adminCategoryFilter">
                   <option value="">All Categories</option>
                   <option value="Assessment">Assessment</option>
@@ -105,31 +419,201 @@
                   <option value="Awareness">Awareness</option>
                 </select>
               </div>
-              <div id="adminResourcesList" class="resources-grid">
-                <!-- Resources populated by JavaScript -->
+            </div>
+
+            <!-- Add / Edit Resource Modal/Card -->
+            <div id="resourceEditorCard" class="card hidden" style="margin-bottom: 1.5rem; background: #ffffff; border: 2px solid var(--primary); padding: 1.5rem;">
+              <h3 id="resourceEditorTitle" style="margin-bottom: 1rem;">Add New Resource</h3>
+              <form id="resourceForm" onsubmit="handleSaveResource(event)">
+                <input type="hidden" id="editResourceId" value="" />
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+                  <div class="form-group">
+                    <label for="resFormName">Resource Name *</label>
+                    <input type="text" id="resFormName" required placeholder="e.g., National Center for Learning Disabilities" />
+                  </div>
+                  <div class="form-group">
+                    <label for="resFormCategory">Category *</label>
+                    <select id="resFormCategory" required>
+                      <option value="">-- Select Category --</option>
+                      <option value="Assessment">Assessment</option>
+                      <option value="Learning Support">Learning Support</option>
+                      <option value="Parent Support">Parent Support</option>
+                      <option value="Teacher Support">Teacher Support</option>
+                      <option value="Inclusive Education">Inclusive Education</option>
+                      <option value="Awareness">Awareness</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="resFormDesc">Description *</label>
+                  <textarea id="resFormDesc" rows="3" required placeholder="Detailed description of the resource..."></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+                  <div class="form-group">
+                    <label for="resFormWebsite">Website URL *</label>
+                    <input type="url" id="resFormWebsite" required placeholder="https://example.org" />
+                  </div>
+                  <div class="form-group">
+                    <label for="resFormSource">Source Organization *</label>
+                    <input type="text" id="resFormSource" required placeholder="e.g., UNESCO / NCLD / NCERT" />
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1rem;">
+                  <button type="button" class="btn btn-outline" onclick="closeResourceEditor()">Cancel</button>
+                  <button type="submit" id="saveResourceBtn" class="btn btn-primary">Save Resource</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="table-responsive-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Title & Description</th>
+                    <th>Category</th>
+                    <th>Source</th>
+                    <th>Verified Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminResourcesTableBody">
+                  <tr><td colspan="5" style="text-align: center; padding: 2rem;">Loading resources from database...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 3. VIEW FEEDBACK TAB -->
+          <section id="feedback-view" class="admin-tab-pane">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+              <div>
+                <h2 style="margin: 0;">Community Feedback</h2>
+                <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Responses submitted by students, parents, and teachers</p>
+              </div>
+              <button class="btn btn-outline" onclick="exportFeedbackToCSV()">📥 Export to CSV</button>
+            </div>
+
+            <div class="admin-filter-bar">
+              <div class="admin-filter-inputs">
+                <select id="feedbackUserTypeFilter">
+                  <option value="">All User Types</option>
+                  <option value="Learner">Learners</option>
+                  <option value="Parent">Parents/Caregivers</option>
+                  <option value="Educator">Educators</option>
+                  <option value="Other">Other</option>
+                </select>
+                <select id="feedbackRatingFilter">
+                  <option value="">All Ratings</option>
+                  <option value="5">5 Stars (Extremely Helpful)</option>
+                  <option value="4">4 Stars (Very Helpful)</option>
+                  <option value="3">3 Stars (Helpful)</option>
+                  <option value="2">2 Stars (Somewhat Helpful)</option>
+                  <option value="1">1 Star (Not Helpful)</option>
+                </select>
+              </div>
+              <span id="feedbackCountDisplay" style="font-size: 0.9rem; color: var(--text-secondary);">Showing all feedback</span>
+            </div>
+
+            <div class="table-responsive-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>User & Role</th>
+                    <th>Rating</th>
+                    <th>Feedback Comments</th>
+                    <th>Suggestions</th>
+                    <th>Submitted On</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adminFeedbackTableBody">
+                  <tr><td colspan="6" style="text-align: center; padding: 2rem;">Loading feedback from database...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 4. VIEW QUIZ ACTIVITIES TAB -->
+          <section id="activities-view" class="admin-tab-pane">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+              <div>
+                <h2 style="margin: 0;">Quiz Activity & Attempts</h2>
+                <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Anonymous awareness activity completion records</p>
+              </div>
+              <button class="btn btn-outline" onclick="exportQuizAttemptsToCSV()">📥 Export to CSV</button>
+            </div>
+
+            <div class="stats-card-grid" style="margin-bottom: 1.5rem;">
+              <div class="admin-stat-box">
+                <span class="stat-number" id="actTotalAttempts">0</span>
+                <span class="stat-label">Total Submissions</span>
+              </div>
+              <div class="admin-stat-box">
+                <span class="stat-number" id="actAvgScore">0%</span>
+                <span class="stat-label">Average Score</span>
+              </div>
+              <div class="admin-stat-box">
+                <span class="stat-number" style="color: var(--success);" id="actPassRate">0%</span>
+                <span class="stat-label">Proficiency Rate (≥60%)</span>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section id="feedback-view" class="admin-section">
-          <h2>User Feedback</h2>
-          <div id="feedbackList" class="feedback-list">
-            <!-- Feedback populated by JavaScript -->
-          </div>
-          <div id="noFeedback" class="no-results">
-            <p>No feedback received yet.</p>
-          </div>
-        </section>
+            <div class="table-responsive-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Date & Time</th>
+                    <th>Score</th>
+                    <th>Percentage</th>
+                    <th>Learner Type</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adminAttemptsTableBody">
+                  <tr><td colspan="5" style="text-align: center; padding: 2rem;">Loading activity attempts...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
 
-        <section id="activities-view" class="admin-section">
-          <h2>Activities</h2>
-          <p>Activity statistics and completion data can be tracked here.</p>
-        </section>
+          <!-- 5. MANAGE QUIZ QUESTIONS TAB -->
+          <section id="quiz-questions-mgmt" class="admin-tab-pane">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+              <div>
+                <h2 style="margin: 0;">Manage Quiz Questions</h2>
+                <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Interactive activity questions stored in Supabase</p>
+              </div>
+            </div>
+
+            <div class="table-responsive-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Question Text</th>
+                    <th>Options Count</th>
+                    <th>Status</th>
+                    <th>Toggle</th>
+                  </tr>
+                </thead>
+                <tbody id="adminQuestionsTableBody">
+                  <tr><td colspan="5" style="text-align: center; padding: 2rem;">Loading questions...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
 
-    <script src="js/app.js"></script>
+    <!-- Pinned Supabase Client & Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
     <script src="js/admin.js"></script>
   </body>
 </html>

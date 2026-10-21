@@ -3,39 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resources | LearnAble</title>
+    <meta name="description" content="Verified organizations, screening frameworks, and inclusive education resources for learning differences." />
+    <title>Verified Resources | LearnAble</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+
     <header class="site-header">
       <div class="container nav-wrapper">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="LearnAble home">
           <span class="brand-mark">L</span>
-          <span><strong>LearnAble</strong><small>Learning Disability Awareness & Support</small></span>
+          <span>
+            <strong data-i18n="brand.title">LearnAble</strong>
+            <small data-i18n="brand.subtitle">Learning Disability Awareness & Support</small>
+          </span>
         </a>
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="learning-areas.html">Learning Areas</a>
-          <a href="assessment.html">Assessment Guide</a>
-          <a href="learner.html">Learner Support</a>
-          <a href="parent.html">Parent Support</a>
-          <a href="educator.html">Educator Support</a>
-          <a href="activities.html">Activities</a>
-          <a href="resources.html" class="active">Resources</a>
-          <a href="faq.html">FAQ</a>
-          <a href="feedback.html">Feedback</a>
+          <a href="index.html" data-i18n="nav.home">Home</a>
+          <a href="about.html" data-i18n="nav.about">About</a>
+          <a href="learning-areas.html" data-i18n="nav.learningAreas">Learning Areas</a>
+          <a href="assessment.html" data-i18n="nav.assessment">Assessment Guide</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+              <span data-i18n="nav.support">Support Pathways</span> ▾
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="learner.html" data-i18n="nav.learner">Learner Support</a>
+              <a href="parent.html" data-i18n="nav.parent">Parent Support</a>
+              <a href="educator.html" data-i18n="nav.educator">Educator Support</a>
+            </div>
+          </div>
+          <a href="activities.html" data-i18n="nav.activities">Activities</a>
+          <a href="resources.html" class="active" data-i18n="nav.resources">Resources</a>
+          <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+          <a href="feedback.html" data-i18n="nav.feedback">Feedback</a>
         </nav>
+
         <div class="toolbar-group">
-          <label class="language-selector">
-            <span>Language</span>
+          <label class="language-selector" aria-label="Language selector">
+            <span>🌐</span>
             <select id="languageSelector">
               <option value="en">English</option>
-              <option value="mr">Marathi</option>
-              <option value="hi">Hindi</option>
+              <option value="hi">हिंदी</option>
+              <option value="mr">मराठी</option>
             </select>
           </label>
         </div>
@@ -46,8 +66,8 @@
       <section class="page-hero">
         <div class="container narrow">
           <p class="eyebrow">Module 8</p>
-          <h1>Resource Directory</h1>
-          <p>Verified resources and support information for learners, parents, and educators.</p>
+          <h1 data-i18n="res.heading">Verified Support Directory</h1>
+          <p data-i18n="res.subheading">Explore verified organizations, screening frameworks, and inclusive teaching resources.</p>
         </div>
       </section>
 
@@ -55,12 +75,18 @@
         <div class="container">
           <div class="resource-controls">
             <div class="search-box">
-              <input type="text" id="resourceSearch" placeholder="Search resources by name or keyword..." aria-label="Search resources" />
+              <input
+                type="text"
+                id="resourceSearch"
+                placeholder="Search by resource name, keyword, or organization..."
+                data-i18n="res.searchPlaceholder"
+                data-i18n-attr="placeholder"
+                aria-label="Search resources"
+              />
             </div>
-            <div class="filter-box">
-              <label for="categoryFilter">Category:</label>
-              <select id="categoryFilter" aria-label="Filter by category">
-                <option value="">All Categories</option>
+            <div class="filter-box" style="display: flex; align-items: center; gap: 0.5rem;">
+              <select id="categoryFilter" aria-label="Filter by category" style="min-width: 200px;">
+                <option value="" data-i18n="res.allCategories">All Categories</option>
                 <option value="Assessment">Assessment</option>
                 <option value="Learning Support">Learning Support</option>
                 <option value="Parent Support">Parent Support</option>
@@ -76,7 +102,8 @@
           </div>
 
           <div id="noResults" class="no-results hidden">
-            <p>No resources found matching your search. Please try different keywords or filters.</p>
+            <h3 data-i18n="res.emptyTitle">No resources found matching your search.</h3>
+            <p data-i18n="res.emptyText">Try adjusting your search terms or selecting "All Categories".</p>
           </div>
         </div>
       </section>
@@ -85,32 +112,45 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <h3>LearnAble – Learning Disability Awareness & Support</h3>
-          <p>This platform is an educational awareness resource and does not provide diagnosis or clinical advice.</p>
+          <div class="footer-brand">
+            <span class="footer-logo-mark" aria-hidden="true"></span>
+            <div class="footer-brand-text">
+              <h3 data-i18n="brand.title">LearnAble</h3>
+              <p class="footer-tagline" data-i18n="brand.subtitle">Learning Disability Awareness & Support</p>
+            </div>
+          </div>
+          <p data-i18n="footer.mission">LearnAble is a Community Engagement Project (B.Sc. IT) dedicated to building inclusive understanding, practical strategies, and verified support resources for learning differences.</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-i18n="footer.quickLinks">Quick Links</h4>
           <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+            <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
+            <li><a href="feedback.html" data-i18n="nav.feedback">Feedback</a></li>
+            <li><a href="login.html" data-i18n="nav.admin">Admin Portal</a></li>
           </ul>
         </div>
         <div>
-          <h4>Project</h4>
-          <p>Community Engagement Project | B.Sc. IT</p>
+          <h4 data-i18n="footer.project">Academic Project</h4>
+          <p data-i18n="footer.projectSub">Community Engagement Project | B.Sc. IT</p>
+          <p data-i18n="footer.rights" style="font-size: 0.85rem; color: var(--gray-400);">Educational Open Source Project.</p>
         </div>
       </div>
     </footer>
 
     <div class="accessibility-toolbar" aria-label="Accessibility toolbar">
-      <button type="button" id="increaseText">A+</button>
-      <button type="button" id="decreaseText">A-</button>
-      <button type="button" id="toggleContrast">High Contrast</button>
-      <button type="button" id="resetAccessibility">Reset</button>
+      <button type="button" id="increaseText" aria-label="Increase text size">A+</button>
+      <button type="button" id="decreaseText" aria-label="Decrease text size">A-</button>
+      <button type="button" id="toggleContrast" aria-label="Toggle high contrast">High Contrast</button>
+      <button type="button" id="resetAccessibility" aria-label="Reset accessibility settings">Reset</button>
     </div>
 
+    <!-- Pinned Supabase Client & App Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
     <script src="js/resources.js"></script>
     <script src="js/accessibility.js"></script>

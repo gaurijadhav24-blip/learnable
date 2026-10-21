@@ -3,39 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn what learning disabilities are, common misconceptions, and why individualized support matters." />
     <title>About Learning Disabilities | LearnAble</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+
     <header class="site-header">
       <div class="container nav-wrapper">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="LearnAble home">
           <span class="brand-mark">L</span>
-          <span><strong>LearnAble</strong><small>Learning Disability Awareness & Support</small></span>
+          <span>
+            <strong data-i18n="brand.title">LearnAble</strong>
+            <small data-i18n="brand.subtitle">Learning Disability Awareness & Support</small>
+          </span>
         </a>
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="index.html">Home</a>
-          <a href="about.html" class="active">About</a>
-          <a href="learning-areas.html">Learning Areas</a>
-          <a href="assessment.html">Assessment Guide</a>
-          <a href="learner.html">Learner Support</a>
-          <a href="parent.html">Parent Support</a>
-          <a href="educator.html">Educator Support</a>
-          <a href="activities.html">Activities</a>
-          <a href="resources.html">Resources</a>
-          <a href="faq.html">FAQ</a>
-          <a href="feedback.html">Feedback</a>
+          <a href="index.html" data-i18n="nav.home">Home</a>
+          <a href="about.html" class="active" data-i18n="nav.about">About</a>
+          <a href="learning-areas.html" data-i18n="nav.learningAreas">Learning Areas</a>
+          <a href="assessment.html" data-i18n="nav.assessment">Assessment Guide</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+              <span data-i18n="nav.support">Support Pathways</span> ▾
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="learner.html" data-i18n="nav.learner">Learner Support</a>
+              <a href="parent.html" data-i18n="nav.parent">Parent Support</a>
+              <a href="educator.html" data-i18n="nav.educator">Educator Support</a>
+            </div>
+          </div>
+          <a href="activities.html" data-i18n="nav.activities">Activities</a>
+          <a href="resources.html" data-i18n="nav.resources">Resources</a>
+          <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+          <a href="feedback.html" data-i18n="nav.feedback">Feedback</a>
         </nav>
+
         <div class="toolbar-group">
-          <label class="language-selector">
-            <span>Language</span>
+          <label class="language-selector" aria-label="Language selector">
+            <span>🌐</span>
             <select id="languageSelector">
               <option value="en">English</option>
-              <option value="mr">Marathi</option>
-              <option value="hi">Hindi</option>
+              <option value="hi">हिंदी</option>
+              <option value="mr">मराठी</option>
             </select>
           </label>
         </div>
@@ -47,71 +67,83 @@
         <div class="container narrow">
           <p class="eyebrow">Module 1</p>
           <h1>About Learning Disabilities</h1>
+          <p>Understanding the science, misconceptions, and principles of inclusive education.</p>
         </div>
       </section>
 
       <section class="section">
-        <div class="container two-col">
+        <div class="container text-grid two-up">
           <div>
             <h2>What is a learning disability?</h2>
-            <p>A learning disability is a difference in how a person processes information while learning. It may affect reading, writing, spelling, comprehension, or mathematics.</p>
-            <p>These difficulties may be persistent and may require specific teaching strategies, accommodations, and professional guidance. They are not a sign of low intelligence.</p>
+            <p>A learning disability is a neurological difference in how an individual perceives, stores, and processes information. It may specifically impact reading (dyslexia), writing and motor coordination (dysgraphia), spelling, verbal comprehension, or mathematics (dyscalculia).</p>
+            <p>These challenges are persistent across multiple school terms and require individualized teaching strategies and accommodations. They are absolutely not a reflection of low intelligence or lack of effort.</p>
           </div>
           <div class="highlight-box">
-            <h3>Important</h3>
-            <p>Learning difficulties should never be labeled based only on one off day, one weak test, or a single classroom challenge.</p>
+            <h3>Important Perspective</h3>
+            <p>Learning differences should never be labeled or assumed based solely on a single difficult test, an off day, or isolated homework struggles. Careful observation over time is essential.</p>
           </div>
         </div>
       </section>
 
       <section class="section section-soft">
         <div class="container">
-          <h2>Common misconceptions</h2>
+          <div class="section-heading">
+            <p class="eyebrow">Myths vs Facts</p>
+            <h2>Common Misconceptions</h2>
+          </div>
+
           <div class="card-grid three-up">
-            <div class="mini-card">
-              <h3>Misconception 1</h3>
-              <p>“If a child is not trying, they must be lazy.”</p>
+            <div class="info-card">
+              <h3>Myth: "They're just lazy"</h3>
+              <p><strong>Fact:</strong> Learners with learning differences often exert twice the cognitive effort to complete routine reading or writing tasks. Fatigue and frustration are natural outcomes, not lack of motivation.</p>
             </div>
-            <div class="mini-card">
-              <h3>Misconception 2</h3>
-              <p>“The child is not intelligent.”</p>
+            <div class="info-card">
+              <h3>Myth: "They aren't smart"</h3>
+              <p><strong>Fact:</strong> Learning disabilities co-exist with average to superior intelligence. Many of history's greatest scientists, artists, and innovators had dyslexia or ADHD.</p>
             </div>
-            <div class="mini-card">
-              <h3>Misconception 3</h3>
-              <p>“The problem will disappear with time.”</p>
+            <div class="info-card">
+              <h3>Myth: "They will outgrow it"</h3>
+              <p><strong>Fact:</strong> Learning differences are lifelong neurological profiles. While they don't simply vanish, individuals develop highly effective coping strategies and thrive with proper accommodations.</p>
             </div>
           </div>
         </div>
       </section>
 
       <section class="section">
-        <div class="container two-col">
+        <div class="container text-grid two-up">
           <div>
-            <h2>Learning disability does not mean low intelligence</h2>
-            <p>Many learners with learning differences are bright, creative, and capable. They may simply learn in different ways or need support in specific areas.</p>
-            <p>Different strengths may co-exist with learning difficulties. A learner may be very strong in oral communication, creativity, problem-solving, or practical work while still needing support in reading or maths.</p>
+            <h2>Learning difference does not mean low capability</h2>
+            <p>Many learners possess exceptional creative strengths, spatial problem-solving skills, interpersonal empathy, or mechanical aptitude. Challenges in written language do not restrict brilliance in spoken discussion, arts, or conceptual sciences.</p>
+            <p>Supportive education aims to identify and nurture these unique strengths rather than solely focusing on academic deficits.</p>
           </div>
           <div>
-            <h2>Temporary challenge vs persistent difficulty</h2>
-            <p>A temporary difficulty may be caused by stress, lack of practice, language differences, or a recent change. Persistent difficulty is more consistent over time and may affect several academic tasks.</p>
-            <p>When difficulties continue despite classroom support, it is reasonable to seek professional guidance.</p>
+            <h2>Temporary challenge vs. persistent difficulty</h2>
+            <p>Temporary difficulties can result from emotional stress, pedagogical gaps, curriculum changes, or illness. In contrast, a learning disability is persistent across developmental stages and academic settings despite standard teaching support.</p>
+            <p>When difficulty continues despite remedial classroom adjustments, seeking qualified professional guidance is recommended.</p>
           </div>
         </div>
       </section>
 
       <section class="section section-soft">
         <div class="container">
-          <h2>Importance of individualized support</h2>
-          <p>Each learner is unique. Some benefit from extra time, simplified instructions, visual supports, speech-to-text tools, or multi-sensory teaching. Others may need more direct support in reading, spelling, or written expression.</p>
-          <p>Support should focus on strengths, confidence, and practical strategies rather than labels.</p>
+          <div class="section-heading">
+            <p class="eyebrow">Inclusive Best Practices</p>
+            <h2>The Value of Individualized Accommodations</h2>
+          </div>
+          <p style="font-size: 1.05rem; line-height: 1.7; max-width: 850px;">
+            Every student's neurological profile is unique. While one student benefits immensely from multi-sensory phonics instruction and audio textbooks, another may excel with extended exam time, graphic organizers, or speech-to-text assistive technology. Effective support emphasizes dignity, self-advocacy, and practical learning tools.
+          </p>
         </div>
       </section>
 
       <section class="section">
         <div class="container narrow">
-          <h2>When to seek professional guidance</h2>
-          <p>If a learner shows ongoing difficulties across time, settings, or school tasks, it is appropriate to speak to a qualified professional. A professional assessment can help understand the profile and suggest suitable support.</p>
-          <div class="disclaimer-box">This portal provides educational awareness and does not diagnose learning disabilities. If concerns persist, consult a qualified professional.</div>
+          <h2>When to Seek Professional Guidance</h2>
+          <p>If a child or student demonstrates persistent struggle over time across home and classroom environments, consult with school counselors, clinical psychologists, or licensed special educators. A formal psycho-educational evaluation clarifies learning profiles and unlocks legitimate examination concessions.</p>
+          <div class="disclaimer-box" role="note">
+            <strong data-i18n="disclaimer.title">Important Educational Disclaimer:</strong>
+            <span data-i18n="disclaimer.body">This portal is for educational awareness and guidance only. It does NOT provide clinical diagnosis, medical evaluation, or treatment. For formal diagnosis, always consult a qualified clinical psychologist, special educator, or developmental pediatrician.</span>
+          </div>
         </div>
       </section>
     </main>
@@ -119,32 +151,41 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <h3>LearnAble – Learning Disability Awareness & Support</h3>
-          <p>This platform is an educational awareness resource and does not provide diagnosis or clinical advice.</p>
+          <div class="footer-brand">
+            <span class="footer-logo-mark" aria-hidden="true"></span>
+            <div class="footer-brand-text">
+              <h3 data-i18n="brand.title">LearnAble</h3>
+              <p class="footer-tagline" data-i18n="brand.subtitle">Learning Disability Awareness & Support</p>
+            </div>
+          </div>
+          <p data-i18n="footer.mission">LearnAble is a Community Engagement Project (B.Sc. IT) dedicated to building inclusive understanding, practical strategies, and verified support resources for learning differences.</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-i18n="footer.quickLinks">Quick Links</h4>
           <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+            <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
+            <li><a href="feedback.html" data-i18n="nav.feedback">Feedback</a></li>
+            <li><a href="login.html" data-i18n="nav.admin">Admin Portal</a></li>
           </ul>
         </div>
         <div>
-          <h4>Project</h4>
-          <p>Community Engagement Project | B.Sc. IT</p>
+          <h4 data-i18n="footer.project">Academic Project</h4>
+          <p data-i18n="footer.projectSub">Community Engagement Project | B.Sc. IT</p>
+          <p data-i18n="footer.rights" style="font-size: 0.85rem; color: var(--gray-400);">Educational Open Source Project.</p>
         </div>
       </div>
     </footer>
 
     <div class="accessibility-toolbar" aria-label="Accessibility toolbar">
-      <button type="button" id="increaseText">A+</button>
-      <button type="button" id="decreaseText">A-</button>
-      <button type="button" id="toggleContrast">High Contrast</button>
-      <button type="button" id="resetAccessibility">Reset</button>
+      <button type="button" id="increaseText" aria-label="Increase text size">A+</button>
+      <button type="button" id="decreaseText" aria-label="Decrease text size">A-</button>
+      <button type="button" id="toggleContrast" aria-label="Toggle high contrast">High Contrast</button>
+      <button type="button" id="resetAccessibility" aria-label="Reset accessibility settings">Reset</button>
     </div>
 
+    <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
     <script src="js/accessibility.js"></script>
   </body>

@@ -1,541 +1,155 @@
-# LearnAble - Learning Disability Awareness & Support Portal
-
-## Project Overview
-
-**LearnAble** is a Community Engagement Project (B.Sc. IT) that provides a comprehensive, non-diagnostic educational platform for awareness, assessment guidance, and support resources related to learning disabilities.
-
-### Mission
-To create a centralized, user-friendly platform that:
-- Builds awareness about learning disabilities
-- Explains assessment pathways
-- Provides practical support strategies
-- Connects users with verified resources
-- Serves learners, parents, and educators
-
-### Important Disclaimer
-**⚠️ CRITICAL:** This portal provides **educational awareness only**. It does NOT:
-- Diagnose learning disabilities
-- Recommend medications
-- Replace professional assessment
-- Provide clinical or medical advice
-
-If concerns persist, users must consult qualified professionals (psychologists, special educators, clinical professionals).
+# LearnAble — Learning Disability Awareness & Support Portal
+> **Community Engagement Project (CEA) — Bachelor of Science in Information Technology (B.Sc. IT)**  
+> **Academic Year 2024–2026**
 
 ---
 
-## Technology Stack
+## 🌟 Project Overview
+**LearnAble** is a community engagement web portal engineered to promote awareness, practical accommodations, assessment pathway guidance, and verified support resources for individuals with learning differences (dyslexia, dysgraphia, dyscalculia).
 
-- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
-- **Styling:** Modern responsive CSS with CSS variables
-- **Data Storage:** localStorage (client-side) for prototype
-- **Icons:** Unicode emoji and SVG illustrations
-- **PWA:** Manifest.json and service worker ready
-- **Accessibility:** WCAG 2.1 compliant
-- **Deployment:** GitHub Pages
+The portal serves three primary community groups:
+1. **Learners / Students:** Actionable study strategies, chunking techniques, multi-sensory tools, and self-advocacy.
+2. **Parents / Caregivers:** Empathetic communication, structured homework routines, and guidance on navigating formal evaluations.
+3. **Educators / Teachers:** Universal Design for Learning (UDL), differentiated classroom methods, and inclusive examination accommodations.
 
 ---
 
-## Project Structure
+## ⚠️ Important Educational Disclaimer
+> **CRITICAL ACADEMIC & MEDICAL DISCLAIMER:**  
+> This portal is strictly an **educational awareness and guidance resource**.  
+> It does **NOT**:
+> - Diagnose learning disabilities or administer clinical psychometric testing
+> - Prescribe medical, neurological, or pharmaceutical interventions
+> - Substitute for formal psycho-educational assessment by certified professionals  
+>
+> If developmental or academic concerns persist, individuals must consult certified clinical psychologists, neuropsychologists, or government-authorized child development centers.
+
+---
+
+## 🚀 Supabase Backend Integration
+The portal is fully integrated with a production-ready **Supabase (PostgreSQL + Auth + Row Level Security)** cloud backend:
+- **Anonymous Feedback:** Submitted by community members with client-side rate limiting, spam honeypots, and strict database length/rating checks.
+- **Verified Resources Directory:** Searchable and categorized support directory fetched live from the database.
+- **Interactive Awareness Activity:** 10-question awareness quiz with results recorded anonymously into `quiz_attempts`.
+- **Protected Administrator Dashboard:** Real-time metrics, feedback moderation, resource CRUD (Create, Read, Update, Delete), quiz analytics, and one-click CSV export for viva reports.
+- **Role-Based Row Level Security (RLS):** Granular policies ensuring public can read verified resources and submit feedback, while only authenticated members of the `admins` table can view feedback, delete entries, and modify resources.
+
+### 📖 Step-by-Step Backend Setup
+For complete, beginner-friendly instructions written in simple Hinglish with exact button names and SQL commands:
+👉 **Read [`SUPABASE_SETUP.md`](SUPABASE_SETUP.md)**
+
+To run an automated 7-point connection self-test:
+👉 **Open `setup-check.html` in your browser**
+
+---
+
+## 🌐 Multilingual Accessibility (i18n)
+LearnAble features a built-in language selector with full support for:
+- 🇬🇧 **English (`en`)**
+- 🇮🇳 **Hindi (`hi`)** — rendered with Google Font *Noto Sans Devanagari*
+- 🇮🇳 **Marathi (`mr`)** — rendered with Google Font *Noto Sans Devanagari*
+
+Language preferences are persisted automatically across sessions using browser `localStorage`.
+
+---
+
+## ♿ WCAG 2.1 Accessibility Features
+- **Collapsible Floating Accessibility Toolbar:** Responsive pill button on mobile devices so form buttons are never covered.
+- **Dynamic Text Resizing:** Instant A+ / A- scaling.
+- **High Contrast Visual Mode:** Enhanced contrast conforming to AAA standards.
+- **Keyboard Navigation & Skip Link:** Direct skip-to-content anchor for screen readers.
+- **Fluid & Touch-Friendly:** Touch targets meet or exceed 44px; mobile form inputs use 16px to prevent iOS auto-zoom.
+
+---
+
+## 📁 Clean Folder Structure
 
 ```
-learnable-cea/
-├── index.html                 # Homepage with hero section
-├── about.html                 # About learning disabilities
-├── learning-areas.html        # Reading, Writing, Spelling, etc.
-├── assessment.html            # Assessment pathway guide
-├── learner.html              # Learner support strategies
-├── parent.html               # Parent/caregiver guidance
-├── educator.html             # Educator support strategies
-├── activities.html           # Interactive learning activity
-├── resources.html            # Resource directory with search/filter
-├── faq.html                  # Frequently asked questions
-├── feedback.html             # Feedback form
-├── login.html                # Admin login (demo credentials)
-├── admin.html                # Admin dashboard
+learnable-project/
+├── index.html              # Homepage with hero section & overview
+├── about.html              # Module 1: Definitions & common myths
+├── learning-areas.html     # Module 2: Reading, writing, math, comprehension
+├── assessment.html         # Module 3: 8-Step assessment pathway guide
+├── learner.html            # Module 4: Learner study strategies & self-advocacy
+├── parent.html             # Module 5: Parent & caregiver support
+├── educator.html           # Module 6: Inclusive classroom strategies & UDL
+├── activities.html         # Module 7: 10-Question interactive awareness quiz
+├── resources.html          # Module 8: Verified resources directory with filter
+├── faq.html                # Module 9: Frequently asked questions
+├── feedback.html           # Module 10: Community feedback form
+├── login.html              # Admin sign-in (Supabase Auth)
+├── admin.html              # Protected Admin Dashboard & analytics
+├── setup-check.html        # Developer self-test diagnostic utility
+├── 404.html                # Custom 404 error page
+├── manifest.json           # PWA progressive web app manifest
+├── SUPABASE_SETUP.md       # Complete beginner setup guide in Hinglish
+├── README.md               # Project documentation (this file)
 │
 ├── css/
-│   └── style.css             # Comprehensive responsive styling
+│   └── style.css           # Production responsive styles & accessibility
 │
 ├── js/
-│   ├── app.js               # Core app initialization
-│   ├── accessibility.js     # Accessibility features (text size, contrast)
-│   ├── activities.js        # Interactive quiz logic
-│   ├── resources.js         # Resource directory with search/filter
-│   ├── feedback.js          # Feedback form handling
-│   └── admin.js             # Admin dashboard logic
+│   ├── config.js           # Supabase project URL & Anon key constants
+│   ├── supabase-client.js  # Client builder, banners & admin check helpers
+│   ├── i18n.js             # Language translation engine (en / hi / mr)
+│   ├── app.js              # Navigation & hamburger drawer logic
+│   ├── accessibility.js    # A+ / A- / High Contrast toolbar controller
+│   ├── activities.js       # Quiz engine, attempt recording & answer review
+│   ├── feedback.js         # Feedback submission, honeypot & rate-limiter
+│   ├── resources.js        # Resource directory search & filter
+│   └── admin.js            # Admin dashboard CRUD, analytics & CSV export
 │
 ├── images/
-│   └── hero-illustration.svg # Scalable SVG illustration
+│   ├── favicon.svg         # Modern vector brand favicon
+│   └── hero-illustration.svg # Scalable vector illustration
 │
-├── manifest.json            # PWA manifest
-├── service-worker.js        # Service worker for offline support
-├── README.md                # This file
-└── .gitignore              # Git ignore rules
+└── supabase/
+    └── schema.sql          # Safe-to-rerun PostgreSQL schema with seed data
 ```
 
 ---
 
-## Features
+## 💻 Local Development & Testing
 
-### 1. **Homepage (index.html)**
-- Hero section with compelling headline
-- User pathway cards (Learner, Parent, Educator)
-- Learning disability overview
-- Timeline of assessment process
-- Call-to-action boxes
-- FAQ preview
+1. Clone or download this repository.
+2. Open the folder in **VS Code**.
+3. Install the **Live Server** extension (Ritwick Dey).
+4. Right-click `index.html` and select **"Open with Live Server"**.
+5. The portal will open at `http://127.0.0.1:5500/index.html`.
 
-### 2. **Educational Modules**
-
-#### Module 1: About Learning Disabilities
-- Definition and characteristics
-- Common misconceptions
-- Intelligence vs. learning differences
-- Temporary vs. persistent difficulties
-
-#### Module 2: Learning Areas
-- Reading, Writing, Spelling, Comprehension, Mathematics
-- Possible difficulties and strategies
-- When to seek professional help
-
-#### Module 3: Assessment Guide
-- Step-by-step assessment pathway (8 steps)
-- Clear messaging: "This site does not diagnose"
-- Professional referral guidance
-
-#### Module 4: Learner Support
-- Study planning and task breaking
-- Reading and writing strategies
-- Memory techniques and time management
-- Exam preparation tips
-
-#### Module 5: Parent/Caregiver Support
-- Communication techniques
-- Homework support strategies
-- Positive learning environment creation
-- Teacher collaboration
-- Professional referral guidance
-
-#### Module 6: Educator Support
-- Inclusive classroom strategies
-- Differentiated learning methods
-- Clear instruction techniques
-- Parent-teacher collaboration
-
-#### Module 7: Interactive Activity
-- 10-question educational quiz
-- NOT diagnostic or named as a "test"
-- Score-based feedback
-- Links to educational resources
-- Clear disclaimer on results
-
-#### Module 8: Resource Directory
-- Search functionality
-- Category filtering
-- Verified organization information
-- External links with source attribution
-- Verification date display
-
-#### Module 9: FAQ
-- Expandable accordion cards
-- Common questions answered
-- Clear, simple language
-- No medical advice
-
-#### Module 10: Feedback
-- Name (optional), user type, rating (1-5)
-- Feedback textarea
-- Suggestions textarea
-- localStorage storage
-- No sensitive child data collection
-
-#### Module 11: Admin Dashboard
-- Simple admin login (username: `admin`, password: `admin123`)
-- Dashboard statistics
-- Resource management (add/edit/delete)
-- Feedback viewer
-- Activity tracking
-- localStorage persistence
+*(Note: Double-clicking HTML files directly using `file:///` is not recommended due to browser CORS policies regarding CDN scripts and authentication tokens).*
 
 ---
 
-## Design Features
+## 🚢 Free Cloud Deployment
 
-### Visual Design
-- **Color Scheme:** Professional blue/purple (#6366f1) primary with supporting colors
-- **Typography:** System fonts for accessibility
-- **Spacing:** Consistent use of CSS variables for spacing
-- **Cards:** Modern card-based layout with hover effects
-- **Icons:** Unicode emoji and SVG illustrations
-- **Buttons:** Multi-style buttons (primary, secondary, outline)
+### Deploy to Vercel (Recommended)
+1. Push your repository to GitHub.
+2. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
+3. Import your GitHub repository.
+4. Framework Preset: **Other**.
+5. Click **Deploy**. Your website is live on a free `.vercel.app` domain with automated HTTPS in under 30 seconds!
 
-### Responsive Design
-- **Mobile-first approach**
-- **Breakpoints:** 768px (tablet), 480px (mobile)
-- **Flexible grids:** CSS Grid and Flexbox
-- **Touch-friendly:** Large tap targets (44px+)
-- **Readable fonts:** 16px+ base size
-
-### Accessibility Features
-- **Skip-to-content link**
-- **Keyboard navigation:** Full keyboard support
-- **Focus states:** Visible focus indicators
-- **ARIA labels:** Semantic HTML and ARIA attributes
-- **Color contrast:** WCAG AA compliant
-- **Text alternatives:** Alt text for all images
-- **Accessibility toolbar:**
-  - Increase/Decrease text size
-  - High contrast mode toggle
-  - Reset to defaults
-  - Settings saved in localStorage
+### Deploy to GitHub Pages
+1. Go to your GitHub repository -> **Settings** -> **Pages**.
+2. Under **Build and deployment**, select **Deploy from a branch**.
+3. Branch: `main` (or `initial-webapp`), Folder: `/ (root)`.
+4. Click **Save**.
 
 ---
 
-## How to Run Locally
+## 🎓 Viva / Defense Presentation Q&A Reference
 
-### Prerequisites
-- Python 3 (or any HTTP server)
-- Git
-- Browser (Chrome, Firefox, Safari, Edge)
+- **Q1: Why does LearnAble not diagnose learning disabilities?**  
+  *Answer:* Diagnostic testing requires specialized standardized psychometric tools, clinical observation, and licensed professionals (RCI-certified clinical psychologists or developmental pediatricians). LearnAble builds awareness and guides families to ethical evaluation pathways without overstepping clinical boundaries.
 
-### Setup Instructions
+- **Q2: Why use Supabase instead of a custom Node.js/Express server?**  
+  *Answer:* Supabase provides an enterprise PostgreSQL database, built-in Auth, and Row Level Security (RLS) over high-performance REST APIs. This eliminates server maintenance costs, ensures 99.9% uptime on static hosting, and allows students to demonstrate professional database security.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/sanchitachavan90-design/learnable-cea.git
-   cd learnable-cea
-   ```
-
-2. **Switch to the project branch:**
-   ```bash
-   git checkout initial-webapp
-   ```
-
-3. **Start a local server:**
-
-   **Using Python:**
-   ```bash
-   python3 -m http.server 8000
-   ```
-
-   **Or using Python 2:**
-   ```bash
-   python -m SimpleHTTPServer 8000
-   ```
-
-   **Or using Node.js (http-server):**
-   ```bash
-   npx http-server -p 8000
-   ```
-
-4. **Open in browser:**
-   ```
-   http://localhost:8000
-   ```
-
-5. **Navigate the application:**
-   - Homepage loads with all modules
-   - Use navbar to explore each section
-   - Test responsive design by resizing browser
-   - Try accessibility toolbar (bottom-right)
-   - Test admin login with `admin/admin123`
+- **Q3: What prevents unauthorized users from altering resources or reading feedback?**  
+  *Answer:* PostgreSQL Row Level Security (RLS) policies. Even if a user inspects the frontend code and copies the `anon` key, Supabase rejects unauthorized SELECT on `feedback` or INSERT/UPDATE/DELETE on `resources` unless the request contains a JWT token belonging to a UID registered in `public.admins`.
 
 ---
 
-## Testing Checklist
-
-### TC01: Homepage
-- [ ] Hero section displays properly
-- [ ] User pathway cards are clickable
-- [ ] All sections render correctly
-- [ ] Images/SVG load without errors
-- [ ] Disclaimer is visible and clear
-
-### TC02: Navigation
-- [ ] All navbar links work
-- [ ] Mobile menu toggles correctly
-- [ ] Active link highlights current page
-- [ ] Language selector is present
-
-### TC03: Responsive Design
-- [ ] Desktop view (1200px+) - side-by-side layouts
-- [ ] Tablet view (768px) - cards stack appropriately
-- [ ] Mobile view (480px) - full-width, readable
-- [ ] Images scale properly
-- [ ] Text remains readable
-
-### TC04: Feedback Validation
-- [ ] Form requires all fields
-- [ ] User type dropdown works
-- [ ] Rating radio buttons select correctly
-- [ ] Submission stores in localStorage
-- [ ] Success message appears
-
-### TC05: Activity Logic
-- [ ] Quiz loads with questions
-- [ ] Radio buttons select answers
-- [ ] Progress bar advances
-- [ ] Previous/Next buttons work
-- [ ] Score calculation is accurate
-- [ ] Results show feedback
-- [ ] Restart button works
-
-### TC06: Resource Filtering
-- [ ] Search box filters by name/description
-- [ ] Category dropdown filters correctly
-- [ ] Combined search + filter works
-- [ ] Resource links open in new tab
-- [ ] No results message appears when appropriate
-
-### TC07: External Resource Links
-- [ ] All resource links are valid
-- [ ] Links open in new tabs
-- [ ] No broken 404 errors
-- [ ] Source attribution is visible
-
-### TC08: Accessibility
-- [ ] Skip-to-content link works
-- [ ] Keyboard-only navigation possible
-- [ ] Focus indicators visible
-- [ ] Color contrast meets WCAG AA
-- [ ] Screen reader navigation works
-- [ ] Accessibility toolbar functions
-
-### TC09: Content Accuracy
-- [ ] No medical/clinical advice given
-- [ ] Disclaimer visible on all pages
-- [ ] Assessment guide shows 8-step process
-- [ ] Learning areas are clearly labeled
-- [ ] No diagnostic language used
-
-### TC10: Privacy & Data
-- [ ] No unnecessary child data collection
-- [ ] Feedback stored only in localStorage
-- [ ] No external analytics
-- [ ] Optional name field in feedback
-- [ ] Privacy notice on feedback form
-
----
-
-## Admin Dashboard
-
-### Access
-- **URL:** `http://localhost:8000/login.html`
-- **Username:** `admin`
-- **Password:** `admin123`
-
-⚠️ **NOTE:** This is a prototype login. In production:
-- Use secure authentication (OAuth, JWT, etc.)
-- Never hardcode credentials
-- Implement SSL/TLS encryption
-- Use role-based access control
-- Store passwords with proper hashing
-
-### Admin Features
-- **Dashboard:** View statistics
-- **Manage Resources:** Add, edit, delete
-- **View Feedback:** Read user submissions
-- **Track Activities:** Monitor usage
-
----
-
-## Data Storage (localStorage)
-
-The prototype uses browser localStorage for data persistence:
-
-```javascript
-// Resources
-localStorage.getItem('learnableResources')
-
-// Feedback
-localStorage.getItem('learnableFeedback')
-
-// Activities
-localStorage.getItem('learnableActivities')
-
-// Admin login
-localStorage.getItem('adminLoggedIn')
-
-// Accessibility settings
-localStorage.getItem('accessibilitySettings')
-```
-
-### Future Migration
-When ready for production:
-1. Replace localStorage with a real database (Firebase, Supabase, PostgreSQL)
-2. Implement secure authentication
-3. Add user accounts and profiles
-4. Enable data analytics
-5. Implement backup and recovery
-
----
-
-## GitHub Pages Deployment
-
-### Step 1: Create GitHub Repository
-```bash
-git init
-git add .
-git commit -m "Initial LearnAble application"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/learnable-cea.git
-git push -u origin main
-```
-
-### Step 2: Enable GitHub Pages
-1. Go to **Repository Settings**
-2. Scroll to **Pages** section
-3. Select **Deploy from branch**
-4. Choose **main** branch and **/root** folder
-5. Click **Save**
-
-### Step 3: Access Published Site
-- URL: `https://YOUR_USERNAME.github.io/learnable-cea/`
-- Wait ~5 minutes for first deployment
-
-### Step 4: Custom Domain (Optional)
-1. Add domain in Pages settings
-2. Update DNS records
-3. Verify ownership
-
----
-
-## Relative Paths & GitHub Pages Compatibility
-
-All paths are **relative** for GitHub Pages compatibility:
-
-```html
-<!-- ✅ Correct -->
-<link rel="stylesheet" href="css/style.css" />
-<script src="js/app.js"></script>
-<img src="images/hero-illustration.svg" />
-
-<!-- ❌ Wrong -->
-<link rel="stylesheet" href="/css/style.css" /> <!-- Absolute path -->
-<script src="http://localhost:8000/js/app.js"></script> <!-- URL -->
-```
-
----
-
-## Explanations for Viva/Defense
-
-### Q1: Why no diagnosis?
-**A:** Learning disabilities require qualified professionals (psychologists, special educators). This portal educates about learning differences and guides toward professional assessment without making clinical claims.
-
-### Q2: How does the activity differ from a test?
-**A:** It's educational awareness content, not diagnostic. Questions teach concepts, not assess disability presence. Results emphasize "for learning only" and never label users.
-
-### Q3: Why these learning areas (Reading, Writing, Spelling, Math)?
-**A:** These are common areas where learning disabilities manifest and where teachers/parents notice difficulty. They're educational examples, not exhaustive.
-
-### Q4: How are resources verified?
-**A:** We use established organizations (NCLD, IDA, LDA, UNESCO, Understood) with verification dates. Users can verify claims and sources independently.
-
-### Q5: Why localStorage instead of a database?
-**A:** For prototyping and education purposes, localStorage is sufficient. It's JavaScript-based, requires no backend, and demonstrates full functionality for viva. Production would use Firebase/PostgreSQL.
-
-### Q6: How is accessibility implemented?
-**A:** WCAG 2.1 compliance through:
-- Skip-to-content link
-- Keyboard navigation
-- Focus indicators
-- Color contrast (4.5:1 ratio)
-- Semantic HTML
-- ARIA labels
-- Accessible toolbar
-
-### Q7: How does the assessment pathway guide work?
-**A:** 8 steps from noticing difficulty to ongoing support, showing collaboration between parents/teachers/professionals without performing diagnosis ourselves.
-
-### Q8: Why responsive design?
-**A:** 60% of web traffic is mobile. Mobile-first design ensures accessibility for learners, parents, and teachers accessing via smartphones.
-
-### Q9: How is content safety ensured?
-**A:** Language review:
-- "May experience" vs. "will have"
-- "Possible difficulty" vs. "definite problem"
-- "Consider seeking" vs. "must see"
-- Disclaimers on every page
-
-### Q10: What's the project's impact?
-**A:** Bridges information gap for:
-- Learners: Self-awareness and coping strategies
-- Parents: Understanding and communication
-- Educators: Inclusive teaching methods
-- Communities: Awareness and reduced stigma
-
----
-
-## Browser Compatibility
-
-- ✅ Chrome/Chromium 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
-
----
-
-## File Size & Performance
-
-- **CSS:** ~25 KB (uncompressed)
-- **JavaScript:** ~15 KB (total)
-- **Images:** 2 KB (SVG)
-- **Total:** ~42 KB (before gzip)
-- **Load Time:** <1 second on 4G
-
----
-
-## Future Enhancements
-
-1. **Backend:** Firebase/Supabase integration
-2. **Authentication:** User accounts
-3. **Analytics:** Track engagement and demographics
-4. **Multilingual:** Marathi, Hindi translations
-5. **Mobile App:** React Native version
-6. **API:** RESTful API for third-party integrations
-7. **CMS:** Content management system for admins
-8. **Chatbot:** AI-powered Q&A support
-9. **Video:** Educational videos for each module
-10. **Community:** Forum for peer support
-
----
-
-## License
-
-This project is open-source for educational purposes.
-
----
-
-## Contact & Support
-
-**Project:** LearnAble - Learning Disability Awareness & Support Portal
-**Institution:** B.Sc. IT Program
-**Organization Reference:** Ummeed Child Development Center, Mumbai
-**Date:** 2024
-
----
-
-## Acknowledgments
-
-- **Design Inspiration:** Educational NGO best practices
-- **Content:** Learning disability awareness organizations
-- **Technology:** Vanilla HTML/CSS/JavaScript best practices
-- **Accessibility:** WCAG 2.1 guidelines
-
----
-
-## Support
-
-For issues or suggestions:
-1. Check this README
-2. Test with Chrome DevTools
-3. Review console for errors
-4. Test on multiple browsers
-5. Verify all relative paths
-
----
-
-**Last Updated:** October 1, 2024
-**Version:** 1.0.0-beta
-**Status:** Ready for demonstration
+## 📜 License & Academic Attribution
+This project was developed for academic and community service purposes as part of the **B.Sc. Information Technology Community Engagement Project (CEA)** curriculum.

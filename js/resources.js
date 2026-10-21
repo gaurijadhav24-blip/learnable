@@ -1,73 +1,87 @@
-// Sample Resources Data
-const resourcesData = [
+/**
+ * LearnAble - Verified Resource Directory
+ * =======================================
+ * Fetches verified resources from Supabase 'resources' table.
+ * Provides client-side real-time filtering, search, loading skeletons,
+ * and graceful fallback data when offline.
+ */
+
+// Fallback verified resources data if database is not connected
+const fallbackResources = [
   {
-    id: 1,
-    name: 'National Center for Learning Disabilities',
+    id: 'fb-1',
+    name: 'National Center for Learning Disabilities (NCLD)',
     category: 'Assessment',
-    description: 'Information about assessment, identification, and support for learning disabilities.',
+    description: 'Authoritative information about assessment, identification, early screening, and support for learning differences.',
     website: 'https://www.ncld.org',
     source: 'NCLD',
-    verificationDate: '2024-09-01',
+    verification_date: '2024-09-01',
     status: 'Verified',
   },
   {
-    id: 2,
+    id: 'fb-2',
     name: 'International Dyslexia Association',
     category: 'Awareness',
-    description: 'Resources and awareness about dyslexia and reading difficulties.',
+    description: 'Global non-profit providing evidence-based research, structured literacy guides, and awareness regarding dyslexia.',
     website: 'https://dyslexiaida.org',
     source: 'IDA',
-    verificationDate: '2024-09-01',
+    verification_date: '2024-09-01',
     status: 'Verified',
   },
   {
-    id: 3,
+    id: 'fb-3',
     name: 'Learning Disabilities Association of America',
     category: 'Learning Support',
-    description: 'Support resources for learners, parents, and educators.',
+    description: 'Comprehensive support resources, study tips, advocacy, and guidance for learners, parents, and educators.',
     website: 'https://ldaamerica.org',
     source: 'LDA',
-    verificationDate: '2024-09-01',
+    verification_date: '2024-09-01',
     status: 'Verified',
   },
   {
-    id: 4,
-    name: 'Understood (Learning and Thinking Differences)',
+    id: 'fb-4',
+    name: 'Understood - Learning and Thinking Differences',
     category: 'Parent Support',
-    description: 'Information for parents and caregivers about learning and attention issues.',
+    description: 'Practical strategies and expert guidance for parents navigating ADHD, dyslexia, and executive function challenges.',
     website: 'https://www.understood.org',
     source: 'Understood',
-    verificationDate: '2024-09-01',
+    verification_date: '2024-09-01',
     status: 'Verified',
   },
   {
-    id: 5,
-    name: 'Teaching Strategies and Accommodations',
+    id: 'fb-5',
+    name: 'NIEPID - Inclusive Education & Learning Disability Resources',
     category: 'Teacher Support',
-    description: 'Evidence-based teaching strategies for inclusive classrooms.',
-    website: 'https://www.edu.gov',
-    source: 'Education Department',
-    verificationDate: '2024-09-01',
+    description: 'National Institute for the Empowerment of Persons with Intellectual Disabilities (Govt. of India) providing screening tools, teacher guidelines, and curriculum adaptations.',
+    website: 'https://niepid.nic.in',
+    source: 'NIEPID, Govt of India',
+    verification_date: '2024-09-01',
     status: 'Verified',
   },
   {
-    id: 6,
-    name: 'Inclusive Education Framework',
+    id: 'fb-6',
+    name: 'UNESCO Inclusive Education Framework',
     category: 'Inclusive Education',
-    description: 'Guidelines and best practices for inclusive education systems.',
+    description: 'International guidelines, policy frameworks, and best practices for creating accessible, inclusive education systems.',
     website: 'https://en.unesco.org/themes/inclusion-education',
     source: 'UNESCO',
-    verificationDate: '2024-09-01',
+    verification_date: '2024-09-01',
     status: 'Verified',
   },
 ];
 
-function initializeResources() {
+let allResources = [];
+
+async function initializeResources() {
+  if (typeof checkAndShowDatabaseBanner === 'function') {
+    checkAndShowDatabaseBanner();
+  }
+
   const searchInput = document.getElementById('resourceSearch');
   const categoryFilter = document.getElementById('categoryFilter');
-  const resourcesContainer = document.getElementById('resourcesContainer');
+  const container = document.getElementById('resourcesContainer');
 
-  if (!resourcesContainer) return;
+  if (!container) return;
 
   if (searchInput) {
     searchInput.addEventListener('input', filterResources);
@@ -76,19 +90,57 @@ function initializeResources() {
     categoryFilter.addEventListener('change', filterResources);
   }
 
-  displayResources(resourcesData);
+  // Show loading skeleton
+  renderLoadingSkeleton(container);
+
+  // Fetch from Supabase
+  try {
+    if (window.isSupabaseConfigured && window.supabaseClient) {
+      const { data, error } = await window.supabaseClient
+        .from('resources')
+        .select('*')
+        .order('name', { ascending: true });
+
+      if (error) throw error;
+      allResources = data && data.length > 0 ? data : fallbackResources;
+    } else {
+      allResources = fallbackResources;
+    }
+  } catch (err) {
+    console.warn('LearnAble: Could not fetch resources from database, using fallback:', err);
+    allResources = fallbackResources;
+  }
+
+  displayResources(allResources);
+}
+
+function renderLoadingSkeleton(container) {
+  container.innerHTML = '';
+  for (let i = 0; i < 6; i++) {
+    const skeleton = document.createElement('div');
+    skeleton.className = 'resource-card skeleton-card';
+    skeleton.innerHTML = `
+      <div class="skeleton-line" style="width: 70%; height: 24px; margin-bottom: 0.75rem;"></div>
+      <div class="skeleton-line" style="width: 30%; height: 18px; margin-bottom: 1rem;"></div>
+      <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 0.5rem;"></div>
+      <div class="skeleton-line" style="width: 90%; height: 16px; margin-bottom: 1rem;"></div>
+      <div class="skeleton-line" style="width: 40%; height: 38px; margin-top: 1rem;"></div>
+    `;
+    container.appendChild(skeleton);
+  }
 }
 
 function filterResources() {
   const searchInput = document.getElementById('resourceSearch');
   const categoryFilter = document.getElementById('categoryFilter');
-  const searchTerm = (searchInput?.value || '').toLowerCase();
+  const searchTerm = (searchInput?.value || '').trim().toLowerCase();
   const selectedCategory = categoryFilter?.value || '';
 
-  const filtered = resourcesData.filter((resource) => {
-    const matchesSearch =
-      resource.name.toLowerCase().includes(searchTerm) ||
-      resource.description.toLowerCase().includes(searchTerm);
+  const filtered = allResources.filter((resource) => {
+    const name = (resource.name || '').toLowerCase();
+    const desc = (resource.description || '').toLowerCase();
+    const source = (resource.source || '').toLowerCase();
+    const matchesSearch = !searchTerm || name.includes(searchTerm) || desc.includes(searchTerm) || source.includes(searchTerm);
     const matchesCategory = !selectedCategory || resource.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
@@ -101,31 +153,62 @@ function displayResources(resources) {
   const container = document.getElementById('resourcesContainer');
   const noResults = document.getElementById('noResults');
 
-  if (resources.length === 0) {
+  if (!container) return;
+
+  if (!resources || resources.length === 0) {
     container.innerHTML = '';
-    noResults.classList.remove('hidden');
+    if (noResults) noResults.classList.remove('hidden');
     return;
   }
 
-  noResults.classList.add('hidden');
+  if (noResults) noResults.classList.add('hidden');
   container.innerHTML = '';
 
   resources.forEach((resource) => {
     const card = document.createElement('div');
     card.className = 'resource-card';
 
-    card.innerHTML = `
-      <h3>${resource.name}</h3>
-      <span class="resource-category">${resource.category}</span>
-      <p>${resource.description}</p>
-      <div class="resource-meta">
-        <p><strong>Source:</strong> ${resource.source}</p>
-        <p><strong>Verified:</strong> ${resource.verificationDate}</p>
-      </div>
-      <div class="resource-actions">
-        <a href="${resource.website}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Visit Resource</a>
-      </div>
-    `;
+    // Safe DOM creation to prevent XSS
+    const title = document.createElement('h3');
+    title.textContent = resource.name || 'Resource';
+
+    const categoryBadge = document.createElement('span');
+    categoryBadge.className = 'resource-category';
+    categoryBadge.textContent = resource.category || 'General';
+
+    const desc = document.createElement('p');
+    desc.textContent = resource.description || '';
+
+    const meta = document.createElement('div');
+    meta.className = 'resource-meta';
+
+    const sourceP = document.createElement('p');
+    sourceP.innerHTML = `<strong>Source:</strong> ${escapeHTML(resource.source || 'Verified Partner')}`;
+
+    const dateP = document.createElement('p');
+    const dateVal = resource.verification_date || resource.verificationDate || 'Verified';
+    dateP.innerHTML = `<strong>Verified:</strong> ${escapeHTML(dateVal)}`;
+
+    meta.appendChild(sourceP);
+    meta.appendChild(dateP);
+
+    const actions = document.createElement('div');
+    actions.className = 'resource-actions';
+
+    const link = document.createElement('a');
+    link.href = resource.website || '#';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.className = 'btn btn-primary';
+    link.textContent = typeof t === 'function' ? t('btn.visitResource') : 'Visit Resource';
+
+    actions.appendChild(link);
+
+    card.appendChild(title);
+    card.appendChild(categoryBadge);
+    card.appendChild(desc);
+    card.appendChild(meta);
+    card.appendChild(actions);
 
     container.appendChild(card);
   });

@@ -3,61 +3,228 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Login | LearnAble</title>
+    <title>Admin Sign In | LearnAble</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .login-shell {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f9fafb 0%, #eef2ff 100%);
+      }
+      .login-card {
+        width: 100%;
+        max-width: 440px;
+        background: #ffffff;
+        border-radius: var(--radius);
+        padding: 2.25rem 2rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border-color);
+      }
+      .login-header {
+        text-align: center;
+        margin-bottom: 1.75rem;
+      }
+      .login-header .brand {
+        justify-content: center;
+        margin-bottom: 1rem;
+        text-decoration: none;
+      }
+      .login-header h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+      .login-header p {
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+      }
+      .login-error {
+        margin-bottom: 1.25rem;
+        padding: 0.85rem;
+        border-radius: 6px;
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+        color: #991b1b;
+        font-size: 0.9rem;
+      }
+      .login-footer-links {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+      .login-footer-links a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .login-footer-links a:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body class="login-page">
-    <div class="login-container">
-      <div class="login-box">
-        <a class="brand" href="index.html">
-          <span class="brand-mark">L</span>
-          <span><strong>LearnAble</strong><small>Learning Disability Awareness & Support</small></span>
-        </a>
+    <a class="skip-link" href="#loginForm">Skip to login form</a>
 
-        <h1>Admin Portal</h1>
-        <p class="login-info">This is a prototype admin login. In production, use secure authentication.</p>
-
-        <form id="loginForm" onsubmit="handleAdminLogin(event)">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required aria-label="Username" />
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required aria-label="Password" />
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%">Login</button>
-        </form>
-
-        <div class="login-help">
-          <p><strong>Demo Credentials (Prototype Only):</strong></p>
-          <p>Username: <code>admin</code></p>
-          <p>Password: <code>admin123</code></p>
+    <div class="login-shell">
+      <div class="login-card">
+        <div class="login-header">
+          <a class="brand" href="index.html" aria-label="LearnAble Home">
+            <span class="brand-mark">L</span>
+            <span>
+              <strong>LearnAble</strong>
+              <small>Learning Disability Portal</small>
+            </span>
+          </a>
+          <h1>Administrator Portal</h1>
+          <p>Sign in with your authorized admin credentials.</p>
         </div>
 
-        <div class="disclaimer-box" style="margin-top: 1rem;">
-          <strong>Security Notice:</strong> This prototype login is for demonstration purposes only. In production, implement proper authentication with secure password hashing, SSL/TLS encryption, and role-based access control.
+        <div id="loginError" class="login-error hidden" role="alert"></div>
+
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="adminEmail">Admin Email Address *</label>
+            <input
+              type="email"
+              id="adminEmail"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="e.g., admin@learnable.org"
+              aria-label="Admin Email Address"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="adminPassword">Password *</label>
+            <input
+              type="password"
+              id="adminPassword"
+              name="password"
+              required
+              autocomplete="current-password"
+              placeholder="••••••••••••"
+              aria-label="Admin Password"
+            />
+          </div>
+
+          <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+            Sign In to Dashboard
+          </button>
+        </form>
+
+        <div class="login-footer-links">
+          <p style="margin-bottom: 0.5rem;">
+            <a href="index.html">← Return to Public Website</a>
+          </p>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            First time setting up? Read <a href="SUPABASE_SETUP.md" target="_blank" rel="noopener noreferrer">SUPABASE_SETUP.md</a> (Step 6).
+          </p>
         </div>
       </div>
     </div>
 
-    <script src="js/app.js"></script>
+    <!-- Pinned Supabase Client & Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
     <script>
-      function handleAdminLogin(event) {
-        event.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        if (username === 'admin' && password === 'admin123') {
-          localStorage.setItem('adminLoggedIn', 'true');
-          window.location.href = 'admin.html';
-        } else {
-          alert('Invalid credentials. Please try again.');
+      document.addEventListener('DOMContentLoaded', async () => {
+        if (typeof checkAndShowDatabaseBanner === 'function') {
+          checkAndShowDatabaseBanner();
         }
-      }
+
+        const form = document.getElementById('loginForm');
+        const errorBox = document.getElementById('loginError');
+        const submitBtn = document.getElementById('loginSubmitBtn');
+
+        // Check if user is already logged in with admin privileges
+        if (window.isSupabaseConfigured && window.supabaseClient) {
+          try {
+            const adminStatus = await checkAdminStatus();
+            if (adminStatus.isAdmin) {
+              window.location.replace('admin.html');
+              return;
+            }
+          } catch (err) {
+            console.warn('Session check error:', err);
+          }
+        }
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          errorBox.classList.add('hidden');
+          errorBox.textContent = '';
+
+          const email = document.getElementById('adminEmail').value.trim();
+          const password = document.getElementById('adminPassword').value;
+
+          if (!email || !password) {
+            showError('Please enter both email and password.');
+            return;
+          }
+
+          if (!window.isSupabaseConfigured || !window.supabaseClient) {
+            showError('Database is not connected yet! Please follow SUPABASE_SETUP.md (Step 5) to configure your Supabase URL and Anon Key in js/config.js.');
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Signing in...';
+
+          try {
+            const { data, error } = await window.supabaseClient.auth.signInWithPassword({
+              email: email,
+              password: password,
+            });
+
+            if (error) {
+              throw error;
+            }
+
+            if (!data || !data.user) {
+              throw new Error('Authentication failed: no user returned.');
+            }
+
+            // Verify if user is in 'admins' table
+            const { data: adminRow, error: adminErr } = await window.supabaseClient
+              .from('admins')
+              .select('user_id')
+              .eq('user_id', data.user.id)
+              .maybeSingle();
+
+            if (adminErr) {
+              throw new Error(`Admin check query error: ${adminErr.message}`);
+            }
+
+            if (!adminRow) {
+              // Sign out immediately so unauthorized users aren't left with an admin session
+              await window.supabaseClient.auth.signOut();
+              showError(`Signed in as ${escapeHTML(email)}, but your account is not registered in the 'admins' table. Please see SUPABASE_SETUP.md (Step 6) to add your user ID into the admins table via SQL Editor.`);
+              return;
+            }
+
+            // Successfully authenticated as an authorized Admin!
+            window.location.replace('admin.html');
+          } catch (err) {
+            console.error('Login error:', err);
+            showError(err.message || 'Login failed. Please check your email and password.');
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Sign In to Dashboard';
+          }
+        });
+
+        function showError(msg) {
+          errorBox.innerHTML = msg;
+          errorBox.classList.remove('hidden');
+        }
+      });
     </script>
   </body>
 </html>

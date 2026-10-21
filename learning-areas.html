@@ -3,39 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore key learning areas including reading, writing, spelling, comprehension, and mathematics with observable indicators and supportive strategies." />
     <title>Learning Areas | LearnAble</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+
     <header class="site-header">
       <div class="container nav-wrapper">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="LearnAble home">
           <span class="brand-mark">L</span>
-          <span><strong>LearnAble</strong><small>Learning Disability Awareness & Support</small></span>
+          <span>
+            <strong data-i18n="brand.title">LearnAble</strong>
+            <small data-i18n="brand.subtitle">Learning Disability Awareness & Support</small>
+          </span>
         </a>
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="learning-areas.html" class="active">Learning Areas</a>
-          <a href="assessment.html">Assessment Guide</a>
-          <a href="learner.html">Learner Support</a>
-          <a href="parent.html">Parent Support</a>
-          <a href="educator.html">Educator Support</a>
-          <a href="activities.html">Activities</a>
-          <a href="resources.html">Resources</a>
-          <a href="faq.html">FAQ</a>
-          <a href="feedback.html">Feedback</a>
+          <a href="index.html" data-i18n="nav.home">Home</a>
+          <a href="about.html" data-i18n="nav.about">About</a>
+          <a href="learning-areas.html" class="active" data-i18n="nav.learningAreas">Learning Areas</a>
+          <a href="assessment.html" data-i18n="nav.assessment">Assessment Guide</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+              <span data-i18n="nav.support">Support Pathways</span> ▾
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="learner.html" data-i18n="nav.learner">Learner Support</a>
+              <a href="parent.html" data-i18n="nav.parent">Parent Support</a>
+              <a href="educator.html" data-i18n="nav.educator">Educator Support</a>
+            </div>
+          </div>
+          <a href="activities.html" data-i18n="nav.activities">Activities</a>
+          <a href="resources.html" data-i18n="nav.resources">Resources</a>
+          <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+          <a href="feedback.html" data-i18n="nav.feedback">Feedback</a>
         </nav>
+
         <div class="toolbar-group">
-          <label class="language-selector">
-            <span>Language</span>
+          <label class="language-selector" aria-label="Language selector">
+            <span>🌐</span>
             <select id="languageSelector">
               <option value="en">English</option>
-              <option value="mr">Marathi</option>
-              <option value="hi">Hindi</option>
+              <option value="hi">हिंदी</option>
+              <option value="mr">मराठी</option>
             </select>
           </label>
         </div>
@@ -45,70 +65,303 @@
     <main id="main-content" class="page-shell">
       <section class="page-hero">
         <div class="container narrow">
-          <p class="eyebrow">Module 2</p>
-          <h1>Learning Areas</h1>
+          <p class="eyebrow">Academic Support Guide</p>
+          <h1 data-i18n="nav.learningAreas">Learning Areas</h1>
+          <p class="lead">Practical exploration of core academic domains, observable classroom indicators, and evidence-based supportive strategies.</p>
         </div>
       </section>
 
       <section class="section">
-        <div class="container card-grid five-up">
-          <article class="info-card learning-card">
-            <h3>Reading</h3>
-            <p>Reading may involve difficulty with decoding words, recognizing patterns, or understanding meaning.</p>
-            <ul>
-              <li>Possible difficulties: slow reading, misreading words, poor sentence understanding.</li>
-              <li>Helpful strategies: guided reading, chunking words, repeated practice with simple texts.</li>
-              <li>When to seek guidance: persistent difficulty across reading tasks.</li>
-            </ul>
-          </article>
+        <div class="container">
+          <!-- Interactive Quick Filter Bar -->
+          <div class="learning-filter-bar" role="tablist" aria-label="Filter learning domains">
+            <button type="button" class="learning-filter-pill active" data-filter="all" role="tab" aria-selected="true">
+              <span>All Areas</span>
+              <span style="font-size:0.75rem; opacity:0.85;">(5)</span>
+            </button>
+            <button type="button" class="learning-filter-pill" data-filter="reading" role="tab" aria-selected="false">
+              <span>📖 Reading (Dyslexia)</span>
+            </button>
+            <button type="button" class="learning-filter-pill" data-filter="writing" role="tab" aria-selected="false">
+              <span>✍️ Writing (Dysgraphia)</span>
+            </button>
+            <button type="button" class="learning-filter-pill" data-filter="spelling" role="tab" aria-selected="false">
+              <span>🔤 Spelling</span>
+            </button>
+            <button type="button" class="learning-filter-pill" data-filter="comprehension" role="tab" aria-selected="false">
+              <span>💡 Comprehension</span>
+            </button>
+            <button type="button" class="learning-filter-pill" data-filter="math" role="tab" aria-selected="false">
+              <span>🔢 Mathematics (Dyscalculia)</span>
+            </button>
+          </div>
 
-          <article class="info-card learning-card">
-            <h3>Writing</h3>
-            <p>Writing may require planning, organizing, and expressing ideas clearly on paper.</p>
-            <ul>
-              <li>Possible difficulties: messy ideas, missing structure, slow writing speed.</li>
-              <li>Helpful strategies: graphic organizers, sentence starters, chunking ideas.</li>
-              <li>When to seek guidance: writing remains difficult despite support.</li>
-            </ul>
-          </article>
+          <!-- 2-Column Responsive Card Grid -->
+          <div class="learning-grid" id="learningGrid">
+            <!-- 1. Reading (Dyslexia) -->
+            <article class="learning-area-card domain-reading" data-category="reading" id="area-reading">
+              <div class="learning-card-header">
+                <div class="learning-card-icon" aria-hidden="true">📖</div>
+                <div class="learning-card-title-group">
+                  <span class="learning-card-tag">Domain 01 • Phonological Processing</span>
+                  <h3>Reading (Dyslexia)</h3>
+                  <p class="learning-card-desc">Challenges with phonetic decoding, word recognition speed, or reading comprehension.</p>
+                </div>
+              </div>
 
-          <article class="info-card learning-card">
-            <h3>Spelling</h3>
-            <p>Spelling may involve remembering letter patterns, sounds, and word forms.</p>
-            <ul>
-              <li>Possible difficulties: missing letters, confusion with similar words.</li>
-              <li>Helpful strategies: sound-based practice, word families, writing in context.</li>
-              <li>When to seek guidance: spelling errors are frequent and interfere with learning.</li>
-            </ul>
-          </article>
+              <div class="learning-block learning-block-indicators">
+                <div class="learning-block-title">
+                  <span>🔍</span>
+                  <span>Observable Indicators (Home & School)</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Hesitant, strained oral reading or frequent guessing of words.</li>
+                  <li>Reversing letters (e.g. b/d, p/q) or omitting word endings.</li>
+                  <li>Skipping lines or losing place on the page without a tracking guide.</li>
+                </ul>
+              </div>
 
-          <article class="info-card learning-card">
-            <h3>Comprehension</h3>
-            <p>Comprehension may involve processing spoken or written information and understanding meaning.</p>
-            <ul>
-              <li>Possible difficulties: misunderstanding tasks, forgetting instructions, weak recall.</li>
-              <li>Helpful strategies: teach key words, ask oral questions, encourage summaries.</li>
-              <li>When to seek guidance: understanding remains weak despite repeated explanations.</li>
-            </ul>
-          </article>
+              <div class="learning-block learning-block-strategies">
+                <div class="learning-block-title">
+                  <span>💡</span>
+                  <span>Evidence-Based Supportive Strategies</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Structured, multisensory phonics (Orton-Gillingham framework).</li>
+                  <li>Audiobooks and text-to-speech tools paired with physical text.</li>
+                  <li>Chunking long paragraphs and using increased line spacing.</li>
+                </ul>
+              </div>
 
-          <article class="info-card learning-card">
-            <h3>Mathematics</h3>
-            <p>Mathematics may involve number sense, memory of facts, sequence, and problem-solving.</p>
-            <ul>
-              <li>Possible difficulties: confusion with number symbols, weak calculation fluency.</li>
-              <li>Helpful strategies: use manipulatives, visual aids, step-by-step methods.</li>
-              <li>When to seek guidance: difficulties remain persistent across time and tasks.</li>
-            </ul>
-          </article>
+              <div class="learning-block learning-block-consult">
+                <div class="learning-block-title">
+                  <span>🩺</span>
+                  <span>When to Seek Consultation</span>
+                </div>
+                <p>Ongoing difficulty reading at age-expected grade level persisting for 6+ months despite targeted phonics practice.</p>
+              </div>
+
+              <div class="learning-card-footer">
+                <a href="activities.html" class="btn btn-secondary">Test in Quiz →</a>
+                <a href="resources.html" class="btn btn-primary">Verified Resources →</a>
+              </div>
+            </article>
+
+            <!-- 2. Writing (Dysgraphia) -->
+            <article class="learning-area-card domain-writing" data-category="writing" id="area-writing">
+              <div class="learning-card-header">
+                <div class="learning-card-icon" aria-hidden="true">✍️</div>
+                <div class="learning-card-title-group">
+                  <span class="learning-card-tag">Domain 02 • Fine Motor & Expression</span>
+                  <h3>Writing (Dysgraphia)</h3>
+                  <p class="learning-card-desc">Difficulties organizing written expression, fine motor pencil grip, or spatial letter consistency.</p>
+                </div>
+              </div>
+
+              <div class="learning-block learning-block-indicators">
+                <div class="learning-block-title">
+                  <span>🔍</span>
+                  <span>Observable Indicators (Home & School)</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Inconsistent letter sizing, mixed uppercase/lowercase, and erratic line spacing.</li>
+                  <li>Awkward or overly tight pencil grip resulting in rapid hand fatigue.</li>
+                  <li>Significant gap between fluent verbal thoughts and labored written output.</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-strategies">
+                <div class="learning-block-title">
+                  <span>💡</span>
+                  <span>Evidence-Based Supportive Strategies</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Digital typing, speech-to-text dictation, and ergonomic pencil grips.</li>
+                  <li>Visual graphic organizers and bulleted outline planning templates.</li>
+                  <li>Allowing oral presentations as an alternative assessment format.</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-consult">
+                <div class="learning-block-title">
+                  <span>🩺</span>
+                  <span>When to Seek Consultation</span>
+                </div>
+                <p>Written work drastically underrepresents student's verbal intellect, or writing causes physical pain and anxiety.</p>
+              </div>
+
+              <div class="learning-card-footer">
+                <a href="activities.html" class="btn btn-secondary">Test in Quiz →</a>
+                <a href="resources.html" class="btn btn-primary">Writing Tools →</a>
+              </div>
+            </article>
+
+            <!-- 3. Spelling -->
+            <article class="learning-area-card domain-spelling" data-category="spelling" id="area-spelling">
+              <div class="learning-card-header">
+                <div class="learning-card-icon" aria-hidden="true">🔤</div>
+                <div class="learning-card-title-group">
+                  <span class="learning-card-tag">Domain 03 • Orthographic Memory</span>
+                  <h3>Spelling & Word Forms</h3>
+                  <p class="learning-card-desc">Challenges retaining orthographic letter patterns, visual word forms, and sound-symbol relationships.</p>
+                </div>
+              </div>
+
+              <div class="learning-block learning-block-indicators">
+                <div class="learning-block-title">
+                  <span>🔍</span>
+                  <span>Observable Indicators (Home & School)</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Inconsistent spelling of the exact same word multiple times on a single page.</li>
+                  <li>Frequent omission or transposition of internal vowels in common words.</li>
+                  <li>Extreme reliance on phonetic spelling (e.g. spelling words strictly as they sound).</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-strategies">
+                <div class="learning-block-title">
+                  <span>💡</span>
+                  <span>Evidence-Based Supportive Strategies</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Multisensory letter tracing using tactile surfaces and color-coded vowels.</li>
+                  <li>Teaching word families, morphological roots, prefixes, and suffixes.</li>
+                  <li>Using visual mnemonic cue cards and word-prediction spell checkers.</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-consult">
+                <div class="learning-block-title">
+                  <span>🩺</span>
+                  <span>When to Seek Consultation</span>
+                </div>
+                <p>Persistent spelling difficulty severely restricting vocabulary choice and undermining student's academic confidence.</p>
+              </div>
+
+              <div class="learning-card-footer">
+                <a href="activities.html" class="btn btn-secondary">Test in Quiz →</a>
+                <a href="resources.html" class="btn btn-primary">Spelling Aids →</a>
+              </div>
+            </article>
+
+            <!-- 4. Comprehension -->
+            <article class="learning-area-card domain-comprehension" data-category="comprehension" id="area-comprehension">
+              <div class="learning-card-header">
+                <div class="learning-card-icon" aria-hidden="true">💡</div>
+                <div class="learning-card-title-group">
+                  <span class="learning-card-tag">Domain 04 • Receptive & Working Memory</span>
+                  <h3>Comprehension & Language</h3>
+                  <p class="learning-card-desc">Processing complex syntax, inferring contextual meaning, and retaining multi-step verbal cues.</p>
+                </div>
+              </div>
+
+              <div class="learning-block learning-block-indicators">
+                <div class="learning-block-title">
+                  <span>🔍</span>
+                  <span>Observable Indicators (Home & School)</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Needing multi-step instructions repeated several times before comprehension.</li>
+                  <li>Difficulty identifying main themes, sequence of events, or implied subtext.</li>
+                  <li>Can decode words accurately aloud but cannot summarize what was just read.</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-strategies">
+                <div class="learning-block-title">
+                  <span>💡</span>
+                  <span>Evidence-Based Supportive Strategies</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Visual anchor charts, mind maps, and bulleted step-by-step checklists.</li>
+                  <li>Reciprocal questioning: pausing after each section to summarize key takeaways.</li>
+                  <li>Pre-teaching critical vocabulary and providing background concept primers.</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-consult">
+                <div class="learning-block-title">
+                  <span>🩺</span>
+                  <span>When to Seek Consultation</span>
+                </div>
+                <p>Comprehension gaps persist across both spoken and written formats, impacting daily classroom task execution.</p>
+              </div>
+
+              <div class="learning-card-footer">
+                <a href="activities.html" class="btn btn-secondary">Test in Quiz →</a>
+                <a href="resources.html" class="btn btn-primary">Learning Resources →</a>
+              </div>
+            </article>
+
+            <!-- 5. Mathematics (Dyscalculia) -->
+            <article class="learning-area-card domain-math" data-category="math" id="area-math">
+              <div class="learning-card-header">
+                <div class="learning-card-icon" aria-hidden="true">🔢</div>
+                <div class="learning-card-title-group">
+                  <span class="learning-card-tag">Domain 05 • Numerical Reasoning</span>
+                  <h3>Mathematics (Dyscalculia)</h3>
+                  <p class="learning-card-desc">Understanding numerical concepts, arithmetic facts, spatial number lines, and mathematical symbols.</p>
+                </div>
+              </div>
+
+              <div class="learning-block learning-block-indicators">
+                <div class="learning-block-title">
+                  <span>🔍</span>
+                  <span>Observable Indicators (Home & School)</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Difficulty estimating basic quantities, reading analog clocks, or counting money.</li>
+                  <li>Struggling to recall foundational arithmetic tables and basic plus/minus operations.</li>
+                  <li>Confusion aligning numbers vertically in columns for multidigit addition/division.</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-strategies">
+                <div class="learning-block-title">
+                  <span>💡</span>
+                  <span>Evidence-Based Supportive Strategies</span>
+                </div>
+                <ul class="learning-list">
+                  <li>Concrete math manipulatives (Base-10 blocks, fraction tiles, bead bars).</li>
+                  <li>Visual color-coded grid paper to keep columns aligned neatly.</li>
+                  <li>Formula reference sheets and calculator accommodations during problem solving.</li>
+                </ul>
+              </div>
+
+              <div class="learning-block learning-block-consult">
+                <div class="learning-block-title">
+                  <span>🩺</span>
+                  <span>When to Seek Consultation</span>
+                </div>
+                <p>Foundational number concepts remain ungrounded despite repeated multisensory tutoring and extra practice.</p>
+              </div>
+
+              <div class="learning-card-footer">
+                <a href="activities.html" class="btn btn-secondary">Test in Quiz →</a>
+                <a href="resources.html" class="btn btn-primary">Math Tools →</a>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
+      <!-- Supportive Context & Educational Notice -->
       <section class="section section-soft">
         <div class="container narrow">
-          <h2>Important reminder</h2>
-          <p>These areas are examples of possible learning challenges. Difficulties in these areas do not automatically mean a learner has a learning disability. They may also reflect temporary issues, language differences, teaching mismatch, or environmental stress.</p>
-          <div class="disclaimer-box">A learner should not be labeled based only on these difficulties. If concerns persist, consult a qualified professional.</div>
+          <h2>Important Contextual Guidance</h2>
+          <p>These academic areas represent common manifestations of learning differences. A student experiencing difficulty in one of these areas does NOT automatically have a clinical disability. Difficulties can stem from instruction pace, linguistic transitions, or stress.</p>
+
+          <div class="disclaimer-box" role="note">
+            <strong data-i18n="disclaimer.title">Important Educational Disclaimer:</strong>
+            <span data-i18n="disclaimer.body">This portal is for educational awareness and guidance only. It does NOT provide clinical diagnosis, medical evaluation, or treatment. For formal diagnosis, always consult a qualified clinical psychologist, special educator, or developmental pediatrician.</span>
+          </div>
+
+          <div style="margin-top: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="learner.html" class="btn btn-secondary" style="flex: 1; min-width: 160px; text-align: center;">Learner Pathway →</a>
+            <a href="parent.html" class="btn btn-secondary" style="flex: 1; min-width: 160px; text-align: center;">Parent Pathway →</a>
+            <a href="educator.html" class="btn btn-primary" style="flex: 1; min-width: 160px; text-align: center;">Educator Pathway →</a>
+          </div>
         </div>
       </section>
     </main>
@@ -116,33 +369,66 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <h3>LearnAble – Learning Disability Awareness & Support</h3>
-          <p>This platform is an educational awareness resource and does not provide diagnosis or clinical advice.</p>
+          <div class="footer-brand">
+            <span class="footer-logo-mark" aria-hidden="true"></span>
+            <div class="footer-brand-text">
+              <h3 data-i18n="brand.title">LearnAble</h3>
+              <p class="footer-tagline" data-i18n="brand.subtitle">Learning Disability Awareness & Support</p>
+            </div>
+          </div>
+          <p data-i18n="footer.mission">LearnAble is a Community Engagement Project (B.Sc. IT) dedicated to building inclusive understanding, practical strategies, and verified support resources for learning differences.</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-i18n="footer.quickLinks">Quick Links</h4>
           <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+            <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
+            <li><a href="feedback.html" data-i18n="nav.feedback">Feedback</a></li>
+            <li><a href="login.html" data-i18n="nav.admin">Admin Portal</a></li>
           </ul>
         </div>
         <div>
-          <h4>Project</h4>
-          <p>Community Engagement Project | B.Sc. IT</p>
+          <h4 data-i18n="footer.project">Academic Project</h4>
+          <p data-i18n="footer.projectSub">Community Engagement Project | B.Sc. IT</p>
+          <p data-i18n="footer.rights" style="font-size: 0.85rem; color: var(--gray-400);">Educational Open Source Project.</p>
         </div>
       </div>
     </footer>
 
-    <div class="accessibility-toolbar" aria-label="Accessibility toolbar">
-      <button type="button" id="increaseText">A+</button>
-      <button type="button" id="decreaseText">A-</button>
-      <button type="button" id="toggleContrast">High Contrast</button>
-      <button type="button" id="resetAccessibility">Reset</button>
-    </div>
+    <div class="accessibility-toolbar" aria-label="Accessibility toolbar"></div>
 
+    <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
     <script src="js/accessibility.js"></script>
+
+    <!-- Interactive Filter Logic for Learning Areas -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const pills = document.querySelectorAll('.learning-filter-pill');
+        const cards = document.querySelectorAll('.learning-area-card');
+
+        pills.forEach((pill) => {
+          pill.addEventListener('click', () => {
+            pills.forEach((p) => {
+              p.classList.remove('active');
+              p.setAttribute('aria-selected', 'false');
+            });
+            pill.classList.add('active');
+            pill.setAttribute('aria-selected', 'true');
+
+            const filter = pill.dataset.filter;
+            cards.forEach((card) => {
+              if (filter === 'all' || card.dataset.category === filter) {
+                card.style.display = 'flex';
+                card.style.animation = 'fadeIn 0.25s ease forwards';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnAble — Supabase Connection Self-Test & Diagnostics</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .diag-shell {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+      }
+      .diag-card {
+        background: #ffffff;
+        border-radius: var(--radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+      }
+      .diag-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .diag-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.25rem;
+        border-radius: var(--radius);
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        background: var(--bg-soft);
+        transition: var(--transition);
+      }
+      .diag-item.pass {
+        border-left: 5px solid var(--success);
+        background: #ecfdf5;
+      }
+      .diag-item.fail {
+        border-left: 5px solid var(--danger);
+        background: #fef2f2;
+      }
+      .diag-item.warn {
+        border-left: 5px solid var(--warning);
+        background: #fffbeb;
+      }
+      .diag-row-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .diag-title {
+        font-weight: 600;
+        font-size: 1.05rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .diag-badge {
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .badge-pass { background: #d1fae5; color: #065f46; }
+      .badge-fail { background: #fee2e2; color: #991b1b; }
+      .badge-warn { background: #fef3c7; color: #92400e; }
+      .badge-pending { background: #e5e7eb; color: #374151; }
+      .diag-desc {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+      .diag-fix {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        border-radius: 6px;
+        background: #ffffff;
+        font-size: 0.88rem;
+        border: 1px dashed #fca5a5;
+        color: #991b1b;
+      }
+      .diag-summary {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border-radius: var(--radius);
+        background: var(--gray-100);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrapper">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">L</span>
+          <span><strong>LearnAble</strong><small>Backend Setup Diagnostics</small></span>
+        </a>
+        <div class="toolbar-group">
+          <a href="index.html" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">← Back to Portal</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="diag-shell">
+      <div class="diag-card">
+        <div class="diag-header">
+          <div>
+            <h1 style="font-size: 1.6rem; margin-bottom: 0.25rem;">Supabase Connection Self-Test</h1>
+            <p style="color: var(--text-secondary); margin: 0;">Developer utility to verify credentials, database tables, and security policies.</p>
+          </div>
+          <button id="runTestsBtn" class="btn btn-primary" onclick="runDiagnostics()">
+            🔄 Re-run All Tests
+          </button>
+        </div>
+
+        <div id="diagnosticsList">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div id="diagSummary" class="diag-summary">
+          <span>Testing database connection...</span>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="admin.html" class="btn btn-outline">Go to Admin Dashboard</a>
+          <a href="resources.html" class="btn btn-outline">Check Resources Page</a>
+          <a href="feedback.html" class="btn btn-outline">Check Feedback Page</a>
+          <a href="activities.html" class="btn btn-outline">Check Quiz Page</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Supabase CDN (Pinned v2) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+
+    <script>
+      const tests = [
+        {
+          id: 'test-config',
+          title: '1. Configuration Filled (js/config.js)',
+          run: async () => {
+            const url = (window.SUPABASE_CONFIG?.url || '').trim();
+            const key = (window.SUPABASE_CONFIG?.anonKey || '').trim();
+
+            if (!url || url.includes('PASTE_YOUR_PROJECT_URL_HERE')) {
+              return { pass: false, message: 'SUPABASE_URL is not set in js/config.js.', fix: 'Open SUPABASE_SETUP.md (Step 5). Copy your Project URL from Supabase Project Settings -> API and paste it into js/config.js.' };
+            }
+            if (!url.startsWith('https://')) {
+              return { pass: false, message: 'SUPABASE_URL must start with https://.', fix: 'Check js/config.js and ensure your URL has https:// format.' };
+            }
+            if (!key || key.includes('PASTE_YOUR_ANON_KEY_HERE') || key.length < 25) {
+              return { pass: false, message: 'SUPABASE_ANON_KEY is missing or invalid.', fix: 'Open SUPABASE_SETUP.md (Step 5). Copy your "anon" public key from Supabase Project Settings -> API and paste it into js/config.js.' };
+            }
+            return { pass: true, message: `Configuration found! URL: ${url.replace(/https:\/\/(.{5}).*/, 'https://$1***.supabase.co')}` };
+          }
+        },
+        {
+          id: 'test-reachability',
+          title: '2. Supabase Server Reachability',
+          run: async () => {
+            if (!window.supabaseClient) {
+              return { pass: false, message: 'Supabase client could not be initialized.', fix: 'Verify config values above. Make sure your device has active internet access.' };
+            }
+            try {
+              const { error } = await window.supabaseClient.auth.getSession();
+              if (error) {
+                return { pass: false, message: `Server returned error: ${error.message}`, fix: 'Verify SUPABASE_URL and SUPABASE_ANON_KEY in js/config.js (SUPABASE_SETUP.md Step 5).' };
+              }
+              return { pass: true, message: 'Successfully connected to Supabase cloud instance.' };
+            } catch (err) {
+              return { pass: false, message: `Connection failed: ${err.message}`, fix: 'Check internet connection and verify if the Supabase project is active or paused (see SUPABASE_SETUP.md Step 12).' };
+            }
+          }
+        },
+        {
+          id: 'test-resources',
+          title: '3. "resources" Table Readable (Public Select)',
+          run: async () => {
+            if (!window.supabaseClient) return { pass: false, message: 'Client not ready.', fix: 'Fix step 1 first.' };
+            try {
+              const { data, error } = await window.supabaseClient.from('resources').select('id, name, category').limit(2);
+              if (error) {
+                return { pass: false, message: error.message, fix: 'Make sure you ran supabase/schema.sql in the Supabase SQL Editor (SUPABASE_SETUP.md Step 4).' };
+              }
+              const count = data ? data.length : 0;
+              return { pass: true, message: `Table readable! Retrieved ${count} resource records successfully.` };
+            } catch (err) {
+              return { pass: false, message: err.message, fix: 'Run supabase/schema.sql in Supabase SQL Editor.' };
+            }
+          }
+        },
+        {
+          id: 'test-quiz',
+          title: '4. "quiz_questions" Table Readable (Public Select)',
+          run: async () => {
+            if (!window.supabaseClient) return { pass: false, message: 'Client not ready.', fix: 'Fix step 1 first.' };
+            try {
+              const { data, error } = await window.supabaseClient.from('quiz_questions').select('id, question').limit(2);
+              if (error) {
+                return { pass: false, message: error.message, fix: 'Run supabase/schema.sql in the Supabase SQL Editor (SUPABASE_SETUP.md Step 4).' };
+              }
+              const count = data ? data.length : 0;
+              return { pass: true, message: `Table readable! Retrieved ${count} quiz questions successfully.` };
+            } catch (err) {
+              return { pass: false, message: err.message, fix: 'Run supabase/schema.sql in Supabase SQL Editor.' };
+            }
+          }
+        },
+        {
+          id: 'test-feedback',
+          title: '5. "feedback" Table Insert Allowed (RLS Check)',
+          run: async () => {
+            if (!window.supabaseClient) return { pass: false, message: 'Client not ready.', fix: 'Fix step 1 first.' };
+            try {
+              // Attempt to insert a benign test row
+              const testRow = {
+                name: 'setup-test',
+                user_type: 'Other',
+                rating: 5,
+                feedback: 'Automated self-test verification row from setup-check.html',
+                suggestions: 'Self-test diagnostic entry',
+              };
+              const { data, error } = await window.supabaseClient.from('feedback').insert([testRow]).select('id');
+              if (error) {
+                return { pass: false, message: `Insert failed: ${error.message}`, fix: 'Verify RLS policy "Anyone can submit feedback" in supabase/schema.sql (SUPABASE_SETUP.md Step 4).' };
+              }
+              return { pass: true, message: 'Insert policy verified! Anonymous feedback submissions are allowed.' };
+            } catch (err) {
+              return { pass: false, message: err.message, fix: 'Check RLS policies in supabase/schema.sql.' };
+            }
+          }
+        },
+        {
+          id: 'test-auth',
+          title: '6. Admin Authentication & Session',
+          run: async () => {
+            if (!window.supabaseClient) return { pass: false, message: 'Client not ready.', fix: 'Fix step 1 first.' };
+            try {
+              const { data: { session }, error } = await window.supabaseClient.auth.getSession();
+              if (error) return { pass: false, message: error.message, fix: 'Check Auth configuration.' };
+              if (!session || !session.user) {
+                return {
+                  pass: 'warn',
+                  message: 'No user is currently signed in in this browser session.',
+                  fix: 'Log in at login.html using your admin credentials created in SUPABASE_SETUP.md (Step 6).'
+                };
+              }
+              return { pass: true, message: `Logged in as: ${session.user.email} (UID: ${session.user.id.substring(0, 8)}...)` };
+            } catch (err) {
+              return { pass: false, message: err.message, fix: 'Check Auth settings.' };
+            }
+          }
+        },
+        {
+          id: 'test-admin-membership',
+          title: '7. Admin Membership (public.admins table)',
+          run: async () => {
+            if (!window.supabaseClient) return { pass: false, message: 'Client not ready.', fix: 'Fix step 1 first.' };
+            try {
+              const { data: { session } } = await window.supabaseClient.auth.getSession();
+              if (!session || !session.user) {
+                return {
+                  pass: 'warn',
+                  message: 'Cannot check admin membership because no user is logged in.',
+                  fix: 'Sign in at login.html first, then re-run this self-test.'
+                };
+              }
+
+              const { data: adminRow, error } = await window.supabaseClient
+                .from('admins')
+                .select('user_id')
+                .eq('user_id', session.user.id)
+                .maybeSingle();
+
+              if (error) {
+                return { pass: false, message: `Query failed: ${error.message}`, fix: 'Make sure table "admins" exists and RLS allows logged-in user check (SUPABASE_SETUP.md Step 4 & 6).' };
+              }
+
+              if (!adminRow) {
+                return {
+                  pass: false,
+                  message: `User ${session.user.email} is logged in but NOT found in public.admins!`,
+                  fix: `Run this in Supabase SQL Editor: insert into public.admins (user_id) values ('${session.user.id}'); (See SUPABASE_SETUP.md Step 6).`
+                };
+              }
+
+              return { pass: true, message: `Confirmed! Current user UID is registered in public.admins. Admin dashboard access granted.` };
+            } catch (err) {
+              return { pass: false, message: err.message, fix: 'Check admins table.' };
+            }
+          }
+        }
+      ];
+
+      async function runDiagnostics() {
+        const container = document.getElementById('diagnosticsList');
+        const summary = document.getElementById('diagSummary');
+        const btn = document.getElementById('runTestsBtn');
+        btn.disabled = true;
+        btn.textContent = '⏳ Running Tests...';
+
+        container.innerHTML = '';
+        let passCount = 0;
+        let failCount = 0;
+        let warnCount = 0;
+
+        for (const test of tests) {
+          const itemEl = document.createElement('div');
+          itemEl.className = 'diag-item';
+          itemEl.id = test.id;
+          itemEl.innerHTML = `
+            <div class="diag-row-top">
+              <span class="diag-title">${escapeHTML(test.title)}</span>
+              <span class="diag-badge badge-pending">Running...</span>
+            </div>
+            <p class="diag-desc">Executing check...</p>
+          `;
+          container.appendChild(itemEl);
+
+          try {
+            const result = await test.run();
+            const badge = itemEl.querySelector('.diag-badge');
+            const desc = itemEl.querySelector('.diag-desc');
+
+            if (result.pass === true) {
+              itemEl.className = 'diag-item pass';
+              badge.className = 'diag-badge badge-pass';
+              badge.textContent = '✔️ Passed';
+              desc.textContent = result.message;
+              passCount++;
+            } else if (result.pass === 'warn') {
+              itemEl.className = 'diag-item warn';
+              badge.className = 'diag-badge badge-warn';
+              badge.textContent = '⚠️ Note';
+              desc.textContent = result.message;
+              if (result.fix) {
+                const fixEl = document.createElement('div');
+                fixEl.className = 'diag-fix';
+                fixEl.style.borderColor = '#fde68a';
+                fixEl.style.color = '#92400e';
+                fixEl.innerHTML = `<strong>Action Needed:</strong> ${escapeHTML(result.fix)}`;
+                itemEl.appendChild(fixEl);
+              }
+              warnCount++;
+            } else {
+              itemEl.className = 'diag-item fail';
+              badge.className = 'diag-badge badge-fail';
+              badge.textContent = '❌ Failed';
+              desc.textContent = result.message;
+              if (result.fix) {
+                const fixEl = document.createElement('div');
+                fixEl.className = 'diag-fix';
+                fixEl.innerHTML = `<strong>How to fix:</strong> ${escapeHTML(result.fix)}`;
+                itemEl.appendChild(fixEl);
+              }
+              failCount++;
+            }
+          } catch (err) {
+            itemEl.className = 'diag-item fail';
+            const badge = itemEl.querySelector('.diag-badge');
+            badge.className = 'diag-badge badge-fail';
+            badge.textContent = '❌ Error';
+            itemEl.querySelector('.diag-desc').textContent = err.message;
+            failCount++;
+          }
+        }
+
+        btn.disabled = false;
+        btn.textContent = '🔄 Re-run All Tests';
+
+        if (failCount === 0 && warnCount === 0) {
+          summary.style.background = '#d1fae5';
+          summary.style.color = '#065f46';
+          summary.innerHTML = `<span>🎉 Excellent! All ${passCount} diagnostic checks passed successfully. Your LearnAble Supabase backend is production-ready!</span>`;
+        } else if (failCount === 0) {
+          summary.style.background = '#fef3c7';
+          summary.style.color = '#92400e';
+          summary.innerHTML = `<span>ℹ️ Core database features passed (${passCount} passed, ${warnCount} notices). Sign in with your admin account to verify admin access.</span>`;
+        } else {
+          summary.style.background = '#fee2e2';
+          summary.style.color = '#991b1b';
+          summary.innerHTML = `<span>⚠️ ${failCount} check(s) failed. Follow the "How to fix" hints above or check <code>SUPABASE_SETUP.md</code>.</span>`;
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', runDiagnostics);
+    </script>
+  </body>
+</html>
