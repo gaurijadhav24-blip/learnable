@@ -226,17 +226,19 @@ textarea:focus-visible {
 }
 
 .brand-mark {
-  width: 38px;
-  height: 38px;
-  background: url('../images/logo-icon.svg') no-repeat center / contain;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+  color: #ffffff !important;
   border-radius: 10px;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  font-size: 0;
-  color: transparent;
+  font-weight: 800 !important;
+  font-size: 1.35rem !important;
+  line-height: 1 !important;
   flex-shrink: 0;
-  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.28);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.28);
   transition: transform 0.2s ease;
 }
 
@@ -245,27 +247,28 @@ textarea:focus-visible {
 }
 
 .brand span {
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .brand strong {
   display: block;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.01em;
 }
 
 .brand small {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   color: var(--text-secondary);
   font-weight: 500;
+  line-height: 1.2;
 }
 
-/* Hide brand subtitle below 1340px to ensure language selector fits with plenty of margin */
-@media (max-width: 1340px) {
+@media (max-width: 820px) {
   .brand small {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -1463,11 +1466,22 @@ body.high-contrast .a11y-status-indicator {
 .footer-logo-mark {
   width: 44px;
   height: 44px;
-  background: url('../images/logo-icon.svg') no-repeat center / contain;
+  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+  color: #ffffff !important;
   border-radius: 11px;
   flex-shrink: 0;
-  display: inline-block;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800 !important;
+  font-size: 1.45rem !important;
+  line-height: 1 !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.footer-logo-mark::before {
+  content: 'L';
+  color: #ffffff;
 }
 
 .footer-brand-text h3 {
@@ -1693,15 +1707,24 @@ body.high-contrast .a11y-status-indicator {
   }
 
   .brand-mark-sm {
-    width: 34px;
-    height: 34px;
-    background: url('../images/logo-icon.svg') no-repeat center / contain;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+    color: #ffffff !important;
     border-radius: 9px;
-    display: inline-block;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800 !important;
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
     flex-shrink: 0;
-    font-size: 0;
-    color: transparent;
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  }
+
+  .brand-mark-sm::before {
+    content: 'L';
+    color: #ffffff;
   }
 
   .mobile-drawer-close {
